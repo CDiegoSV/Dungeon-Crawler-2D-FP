@@ -361,7 +361,6 @@ GameObject:
   - component: {fileID: 815613667}
   - component: {fileID: 815613670}
   - component: {fileID: 815613669}
-  - component: {fileID: 815613668}
   m_Layer: 5
   m_Name: BackgroundPanel
   m_TagString: Untagged
@@ -389,27 +388,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!95 &815613668
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 815613666}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 91ad5fab978eaeb4a853a0d132f9834b, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &815613669
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -423,8 +401,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
-  m_RaycastTarget: 1
+  m_Color: {r: 0, g: 0, b: 0, a: 0}
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -590,8 +568,8 @@ Canvas:
   m_GameObject: {fileID: 913091814}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
-  m_Camera: {fileID: 0}
+  m_RenderMode: 1
+  m_Camera: {fileID: 1609408118}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -639,29 +617,33 @@ PrefabInstance:
       propertyPath: m_Name
       value: ForestBackground
       objectReference: {fileID: 0}
+    - target: {fileID: 1754289667383709535, guid: 6ff4f66be5d17f84b865e5d86c8f923f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2159271902191745218, guid: 6ff4f66be5d17f84b865e5d86c8f923f, type: 3}
       propertyPath: m_LocalScale.x
-      value: 3.1036284
+      value: 95.66
       objectReference: {fileID: 0}
     - target: {fileID: 2159271902191745218, guid: 6ff4f66be5d17f84b865e5d86c8f923f, type: 3}
       propertyPath: m_LocalScale.y
-      value: 3.1036284
+      value: 95.66
       objectReference: {fileID: 0}
     - target: {fileID: 2159271902191745218, guid: 6ff4f66be5d17f84b865e5d86c8f923f, type: 3}
       propertyPath: m_LocalScale.z
-      value: 3.1036284
+      value: 95.66
       objectReference: {fileID: 0}
     - target: {fileID: 2159271902191745218, guid: 6ff4f66be5d17f84b865e5d86c8f923f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -480.2865
+      value: -580
       objectReference: {fileID: 0}
     - target: {fileID: 2159271902191745218, guid: 6ff4f66be5d17f84b865e5d86c8f923f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -263.34286
+      value: -130
       objectReference: {fileID: 0}
     - target: {fileID: 2159271902191745218, guid: 6ff4f66be5d17f84b865e5d86c8f923f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 49.658054
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 2159271902191745218, guid: 6ff4f66be5d17f84b865e5d86c8f923f, type: 3}
       propertyPath: m_LocalRotation.w
@@ -691,9 +673,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2159271902191745218, guid: 6ff4f66be5d17f84b865e5d86c8f923f, type: 3}
-      propertyPath: m_ConstrainProportionsScale
-      value: 1
+    - target: {fileID: 7421250485989748490, guid: 6ff4f66be5d17f84b865e5d86c8f923f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1144,9 +1126,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 913091818}
     m_Modifications:
+    - target: {fileID: 2653347203517694289, guid: 5e32bacafb7d8ec4e88c686dcf11213e, type: 3}
+      propertyPath: _playOnAwake
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3537674488324228893, guid: 5e32bacafb7d8ec4e88c686dcf11213e, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4308291275449748759, guid: 5e32bacafb7d8ec4e88c686dcf11213e, type: 3}
       propertyPath: m_Name
       value: TransitionPanel
+      objectReference: {fileID: 0}
+    - target: {fileID: 4308291275449748759, guid: 5e32bacafb7d8ec4e88c686dcf11213e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5811541404396752970, guid: 5e32bacafb7d8ec4e88c686dcf11213e, type: 3}
       propertyPath: m_Pivot.x

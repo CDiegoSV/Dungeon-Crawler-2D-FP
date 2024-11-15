@@ -56,6 +56,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: DestroyableObject
       objectReference: {fileID: 0}
+    - target: {fileID: 3209659465230041952, guid: ab90cba76176bc44f9b70b84ee440fb0, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4153643460065611207, guid: ab90cba76176bc44f9b70b84ee440fb0, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4153643460065611207, guid: ab90cba76176bc44f9b70b84ee440fb0, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4658189665935228654, guid: ab90cba76176bc44f9b70b84ee440fb0, type: 3}
       propertyPath: m_Color.b
       value: 0.10902455
@@ -71,6 +83,10 @@ PrefabInstance:
     - target: {fileID: 6456717340057506576, guid: ab90cba76176bc44f9b70b84ee440fb0, type: 3}
       propertyPath: m_Constraints
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6495711580750186322, guid: ab90cba76176bc44f9b70b84ee440fb0, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2660077242759885590, guid: ab90cba76176bc44f9b70b84ee440fb0, type: 3}

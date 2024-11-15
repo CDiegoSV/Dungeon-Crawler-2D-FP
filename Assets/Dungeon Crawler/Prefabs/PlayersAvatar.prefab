@@ -8,6 +8,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1437349632472811433, guid: ab90cba76176bc44f9b70b84ee440fb0, type: 3}
+      propertyPath: m_Size.x
+      value: 1.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1437349632472811433, guid: ab90cba76176bc44f9b70b84ee440fb0, type: 3}
+      propertyPath: m_Size.y
+      value: 1.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1437349632472811433, guid: ab90cba76176bc44f9b70b84ee440fb0, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2742683217258075477, guid: ab90cba76176bc44f9b70b84ee440fb0, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -73,8 +85,16 @@ PrefabInstance:
       value: PlayersAvatar
       objectReference: {fileID: 0}
     - target: {fileID: 3209659465230041952, guid: ab90cba76176bc44f9b70b84ee440fb0, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209659465230041952, guid: ab90cba76176bc44f9b70b84ee440fb0, type: 3}
       propertyPath: m_TagString
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 4153643460065611207, guid: ab90cba76176bc44f9b70b84ee440fb0, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4658189665935228654, guid: ab90cba76176bc44f9b70b84ee440fb0, type: 3}
       propertyPath: m_Sprite
@@ -95,6 +115,10 @@ PrefabInstance:
     - target: {fileID: 4658189665935228654, guid: ab90cba76176bc44f9b70b84ee440fb0, type: 3}
       propertyPath: m_SpriteSortPoint
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6495711580750186322, guid: ab90cba76176bc44f9b70b84ee440fb0, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7996550187066274308, guid: ab90cba76176bc44f9b70b84ee440fb0, type: 3}
       propertyPath: m_Controller

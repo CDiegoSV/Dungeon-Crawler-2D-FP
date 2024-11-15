@@ -33,6 +33,8 @@ namespace SotomaYorch.DungeonCrawler
 
         #region References
 
+        [SerializeField] protected HitBox _hitBox;
+
         #endregion
 
         #region RuntimeVariables
@@ -47,15 +49,25 @@ namespace SotomaYorch.DungeonCrawler
         {
             base.InitializeAgent();
             _movementInputVector = Vector2.zero;
+            if(_hitBox == null)
+            {
+                _hitBox = transform.GetChild(0).GetComponent<HitBox>();
+            }
         }
 
         #endregion
 
         #region UnityMethods
 
+        private void OnDrawGizmos()
+        {
+            #if UNITY_EDITOR
+            InitializeAgent();
+            #endif
+        }
+
         void Start()
         {
-            InitializeAgent();
         }
 
         void Update()
@@ -71,6 +83,11 @@ namespace SotomaYorch.DungeonCrawler
         #endregion
 
         #region PublicMethods
+
+        public void ActivateHitBox()
+        {
+            _hitBox.ActivateHitBox();
+        }
 
         public void OnMOVE(InputAction.CallbackContext value)
         {
@@ -91,9 +108,59 @@ namespace SotomaYorch.DungeonCrawler
             }
         }
 
+        public void OnATTACK(InputAction.CallbackContext value)
+        {
+            if (value.performed)
+            {
+                _fsm.StateMechanic(StateMechanics.ATTACK);
+            }
+            else if (value.canceled)
+            {
+                
+            }
+        }
+
+        public void OnSPRINT(InputAction.CallbackContext value)
+        {
+            if (value.performed)
+            {
+
+            }
+            else if (value.canceled)
+            {
+
+            }
+        }
+
+        public void OnPAUSE(InputAction.CallbackContext value)
+        {
+            if (value.performed)
+            {
+
+            }
+            else if (value.canceled)
+            {
+
+            }
+        }
+
+        public void OnINTERACT(InputAction.CallbackContext value)
+        {
+            if (value.performed)
+            {
+
+            }
+            else if (value.canceled)
+            {
+
+            }
+        }
+
         #endregion
 
         #region GettersSetters
+
+
 
         #endregion
     }

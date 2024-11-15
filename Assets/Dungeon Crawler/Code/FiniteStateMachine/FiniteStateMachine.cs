@@ -18,7 +18,11 @@ namespace SotomaYorch.DungeonCrawler
         MOVING_DOWN,
         MOVING_UP,
         MOVING_RIGHT,
-        MOVING_LEFT
+        MOVING_LEFT,
+
+        ATTACK,
+
+        DEATH //TODO: Complete code to admin new states.
     }
 
     public enum StateMechanics
@@ -29,7 +33,11 @@ namespace SotomaYorch.DungeonCrawler
         MOVE_UP,
         MOVE_DOWN,
         MOVE_LEFT,
-        MOVE_RIGHT
+        MOVE_RIGHT,
+        //ATTACK
+        ATTACK,
+
+        DIE
     }
 
     #endregion
@@ -51,6 +59,8 @@ namespace SotomaYorch.DungeonCrawler
         [SerializeField,HideInInspector] protected Animator _animator;
         [SerializeField,HideInInspector] protected Rigidbody2D _rigidbody;
 
+
+
         #endregion
 
         #region RuntimeVariables
@@ -58,6 +68,8 @@ namespace SotomaYorch.DungeonCrawler
         [SerializeField] protected States _state;
         [SerializeField] protected Vector2 _movementDirection;
         [SerializeField] protected float _movementSpeed;
+
+        [SerializeField] protected Agent _agent;
 
         #endregion
 
@@ -76,9 +88,35 @@ namespace SotomaYorch.DungeonCrawler
             }
         }
 
+        protected void InitializeState()
+        {
+            switch(_state)
+            {
+                case States.DEATH:
+                    //Death
+                    break;
+                case States.ATTACK:
+                    if(_agent as PlayersAvatar)
+                    {
+                        ((PlayersAvatar)_agent).ActivateHitBox();
+                    }
+                    break;
+            }
+        }
+
         #endregion
 
         #region UnityMethods
+
+        private void OnDrawGizmos()
+        {
+            #if UNITY_EDITOR
+            if(_agent == null)
+            {
+                _agent = gameObject.GetComponent<Agent>();
+            }
+            #endif
+        }
 
         private void Start()
         {
@@ -104,7 +142,7 @@ namespace SotomaYorch.DungeonCrawler
         {
             CleanAnimatorFlags();
             _state = value;
-            //InitializeState();
+            InitializeState();
         }
 
         #endregion

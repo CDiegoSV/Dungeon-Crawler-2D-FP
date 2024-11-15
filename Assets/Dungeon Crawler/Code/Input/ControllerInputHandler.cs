@@ -46,6 +46,26 @@ namespace SotomaYorch.DungeonCrawler
             _avatar?.OnMOVE(value);
         }
 
+        public void OnAttack(InputAction.CallbackContext value)
+        {
+            _avatar?.OnATTACK(value);
+        }
+
+        public void OnSprint(InputAction.CallbackContext value)
+        {
+            _avatar?.OnSPRINT(value);
+        }
+
+        public void OnPause(InputAction.CallbackContext value)
+        {
+            _avatar?.OnPAUSE(value);
+        }
+
+        public void OnInteract(InputAction.CallbackContext value)
+        {
+            _avatar?.OnINTERACT(value);
+        }
+
         #endregion
     }
 }

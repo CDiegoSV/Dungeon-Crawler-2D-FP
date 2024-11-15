@@ -76,9 +76,9 @@ public class ButtonListener : MonoBehaviour
     {
         _transitionPanel.Play("TransitionOut");
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(_transitionOutClip.length);
 
-
+        SceneManager.LoadScene(sceneID);
     }
 
     #endregion
@@ -90,7 +90,7 @@ public class ButtonListener : MonoBehaviour
     }
     protected void QuitOnClickAction()
     {
-        Application.Quit();
+        StartCoroutine(SceneTransitionCoroutine());
     }
     #endregion
 

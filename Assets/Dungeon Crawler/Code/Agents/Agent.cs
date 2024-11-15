@@ -105,6 +105,10 @@ namespace SotomaYorch.DungeonCrawler
             */
         }
 
+        public void StateMechanic(StateMechanics value)
+        {
+            _fsm.StateMechanic(value);
+        }
         #endregion
 
         #region GettersSetters
