@@ -86,11 +86,11 @@ public class ButtonListener : MonoBehaviour
     #region OnClick Actions
     protected void SceneLoaderOnClickAction()
     {
-        SceneManager.LoadScene(sceneID);
+        StartCoroutine(SceneTransitionCoroutine());
     }
     protected void QuitOnClickAction()
     {
-        StartCoroutine(SceneTransitionCoroutine());
+        Application.Quit();
     }
     #endregion
 
