@@ -285,7 +285,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 866381445
   m_SortingLayer: 1
-  m_SortingOrder: 1
+  m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0.00062578917, y: 0.00062578917, z: 0}
   m_MaxChunkCount: 16
@@ -116497,8 +116497,20 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4536870000911766707, guid: 50c33fe7c1d8fa643930e7018259a4a5, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4536870000911766707, guid: 50c33fe7c1d8fa643930e7018259a4a5, type: 3}
+      propertyPath: m_PlaneDistance
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4536870000911766707, guid: 50c33fe7c1d8fa643930e7018259a4a5, type: 3}
       propertyPath: m_SortingLayerID
       value: 1733166425
+      objectReference: {fileID: 0}
+    - target: {fileID: 4906105380765184022, guid: 50c33fe7c1d8fa643930e7018259a4a5, type: 3}
+      propertyPath: m_Color.a
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5899488826699675226, guid: 50c33fe7c1d8fa643930e7018259a4a5, type: 3}
       propertyPath: _playOnAwake
