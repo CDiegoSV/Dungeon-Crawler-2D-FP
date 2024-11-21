@@ -99,6 +99,7 @@ namespace SotomaYorch.DungeonCrawler
                     if(_agent as PlayersAvatar)
                     {
                         ((PlayersAvatar)_agent).ActivateHitBox();
+                        _movementSpeed = 0;
                     }
                     break;
             }
@@ -162,6 +163,11 @@ namespace SotomaYorch.DungeonCrawler
         public float SetMovementSpeed
         {
             set { _movementSpeed = value; }
+        }
+
+        public States GetCurrentState
+        {
+            get { return _state;}
         }
 
         #endregion

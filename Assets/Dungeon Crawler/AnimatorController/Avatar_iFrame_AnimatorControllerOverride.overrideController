@@ -6,7 +6,7 @@ AnimatorOverrideController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Avatar_iFrame_AnimatorControllerOverride 1
+  m_Name: Avatar_iFrame_AnimatorControllerOverride
   m_Controller: {fileID: 9100000, guid: 5539fb3a97a0a8144bd3aef8207376f7, type: 2}
   m_Clips:
   - m_OriginalClip: {fileID: 7400000, guid: d84b968edababb04683039a20b4e47e6, type: 2}

@@ -95,7 +95,10 @@ namespace SotomaYorch.DungeonCrawler
             {
                 _movementInputVector = value.ReadValue<Vector2>();
                 _fsm.SetMovementDirection = _movementInputVector;
-                _fsm.SetMovementSpeed = 3.0f;
+                if (_fsm.GetCurrentState != States.ATTACK)
+                {
+                    _fsm.SetMovementSpeed = 3.0f;
+                }
                 CalculateStateMechanicDirection();
                 _fsm.StateMechanic(_movementStateMechanic);
             }
@@ -113,6 +116,7 @@ namespace SotomaYorch.DungeonCrawler
             if (value.performed)
             {
                 _fsm.StateMechanic(StateMechanics.ATTACK);
+                _fsm.SetMovementSpeed = 0.0f;
             }
             else if (value.canceled)
             {
