@@ -66,11 +66,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0bde01278646ef4d96054a83d7a46c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  walkSpeed: 0
+  sprintSpeed: 0
   _animator: {fileID: 7996550187066274308}
   _rigidbody: {fileID: 6456717340057506576}
   _state: 0
   _movementDirection: {x: 0, y: 0}
-  _movementSpeed: 0
+  _currentMovementSpeed: 0
   _agent: {fileID: 0}
 --- !u!95 &7996550187066274308
 Animator:
@@ -308,7 +310,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 1
-  lifeTime: 1
+  hitAnimation: {fileID: 7400000, guid: 383732ede47b8454d837f9026e7218a4, type: 2}
   _collider: {fileID: 0}
 --- !u!1 &6495711580750186322
 GameObject:
@@ -400,7 +402,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fc504e08b158b74bb7d3473b1494f9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealthPoints: 3
-  coolDownTime: 1
+  _hurtBoxSO: {fileID: 0}
   _agent: {fileID: 0}
   _currentHealthPoints: 0

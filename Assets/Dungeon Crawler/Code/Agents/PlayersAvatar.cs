@@ -50,6 +50,8 @@ namespace Dante.DungeonCrawler
         public override void InitializeAgent()
         {
             base.InitializeAgent();
+            _isCarrying = false;
+            _isInteracting = false;
             _movementInputVector = Vector2.zero;
             if(_hitBox == null)
             {
@@ -80,6 +82,48 @@ namespace Dante.DungeonCrawler
         private void FixedUpdate()
         {
             _rigidbody.velocity = _movementInputVector;
+
+            switch (_fsm.GetCurrentState)
+            {
+                case States.IDLE_UP:
+                case States.IDLE_DOWN:
+                case States.IDLE_LEFT:
+                case States.IDLE_RIGHT:
+                case States.MOVING_UP:
+                case States.MOVING_DOWN:
+                case States.MOVING_LEFT:
+                case States.MOVING_RIGHT:
+                case States.SPRINTING_UP:
+                case States.SPRINTING_LEFT:
+                case States.SPRINTING_RIGHT:
+                case States.SPRINTING_DOWN:
+                    if (_movementInputVector != Vector2.zero)
+                    {
+                        //Dot
+                        //!=
+                        //magnitude
+                        if (_movementInputVector != _fsm.GetMovementDirection)
+                        {
+                            _fsm.SetMovementDirection = _movementInputVector;
+                            CalculateStateMechanicDirection();
+                            _fsm.StateMechanic(_movementStateMechanic);
+                        }
+                        
+                    }
+                    else
+                    {
+                        if (_fsm.GetMovementDirection != Vector2.zero)
+                        {
+                            _fsm.SetMovementDirection = Vector2.zero;
+                            _fsm.SetMovementSpeed = 0.0f;
+                            _fsm.StateMechanic(StateMechanics.STOP);
+                        }
+                    }
+                    break;
+                case States.ATTACKING:
+
+                    break;
+            }
         }
 
         #endregion
@@ -96,20 +140,51 @@ namespace Dante.DungeonCrawler
             if (value.performed)
             {
                 _movementInputVector = value.ReadValue<Vector2>();
-                _fsm.SetMovementDirection = _movementInputVector;
-                if (_fsm.GetCurrentState != States.ATTACKING)
+                switch (_fsm.GetCurrentState)
                 {
-                    _fsm.SetMovementSpeed = 3.0f;
+                    case States.IDLE_UP:
+                    case States.IDLE_DOWN:
+                    case States.IDLE_LEFT:
+                    case States.IDLE_RIGHT:
+                    case States.MOVING_UP:
+                    case States.MOVING_DOWN:
+                    case States.MOVING_LEFT:
+                    case States.MOVING_RIGHT:
+                    case States.SPRINTING_UP:
+                    case States.SPRINTING_LEFT:
+                    case States.SPRINTING_RIGHT:
+                    case States.SPRINTING_DOWN:
+                        if (_movementInputVector != Vector2.zero)
+                        {
+                            //Dot
+                            //!=
+                            //magnitude
+                            if (_movementInputVector != _fsm.GetMovementDirection)
+                            {
+                                _fsm.SetMovementDirection = _movementInputVector;
+                                CalculateStateMechanicDirection();
+                                _fsm.StateMechanic(_movementStateMechanic);
+                            }
+
+                        }
+                        else
+                        {
+                            if (_fsm.GetMovementDirection != Vector2.zero)
+                            {
+                                _fsm.SetMovementDirection = Vector2.zero;
+                                _fsm.SetMovementSpeed = 0.0f;
+                                _fsm.StateMechanic(StateMechanics.STOP);
+                            }
+                        }
+                        break;
+                    case States.ATTACKING:
+
+                        break;
                 }
-                CalculateStateMechanicDirection();
-                _fsm.StateMechanic(_movementStateMechanic);
             }
             else if (value.canceled)
             {
                 _movementInputVector = Vector2.zero;
-                _fsm.SetMovementDirection = Vector2.zero;
-                _fsm.SetMovementSpeed = 0.0f;
-                _fsm.StateMechanic(StateMechanics.STOP);
             }
         }
 
@@ -131,11 +206,15 @@ namespace Dante.DungeonCrawler
             {
                 if (value.performed)
                 {
-
+                    _isSprinting = true;
+                    CalculateStateMechanicDirection();
+                    _fsm.StateMechanic(_movementStateMechanic);
                 }
                 else if (value.canceled)
                 {
-
+                    _isSprinting = false;
+                    CalculateStateMechanicDirection();
+                    _fsm.StateMechanic(_movementStateMechanic);
                 }
             }
         }
@@ -171,6 +250,13 @@ namespace Dante.DungeonCrawler
         public bool IsInteracting { get { return _isInteracting; } }
 
         public bool SetIsCarrying { set { _isCarrying = value; } }
+
+        public bool IsSprinting { get { return _isSprinting; } }
+
+        public Vector2 GetMovementInputVector
+        {
+            get { return _movementInputVector; }
+        }
 
         #endregion
     }

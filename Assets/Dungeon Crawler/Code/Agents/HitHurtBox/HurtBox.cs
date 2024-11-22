@@ -54,19 +54,42 @@ namespace Dante.DungeonCrawler
                 {
                     if(other.gameObject.layer != gameObject.layer)
                     {
-                        //_currentHealthPoints--;
-                        _currentHealthPoints -= other.gameObject.GetComponent<HitBox>().GetDamage;
+                        switch (_hurtBoxSO.agentType)
+                        {
+                            case AgentType.DestroyableObject:
+                                if(other.gameObject.layer != LayerMask.NameToLayer("EnemyNPC"))
+                                {
+                                    _currentHealthPoints -= other.gameObject.GetComponent<HitBox>().GetDamage;
 
-                        if (_currentHealthPoints <= 0)
-                        {
-                            _agent.StateMechanic(StateMechanics.DIE);
-                            //TODO: Complete the admin of this state
-                            //animator, initialize, exe, finalize
+                                    if (_currentHealthPoints <= 0)
+                                    {
+                                        _agent.StateMechanic(StateMechanics.DIE);
+                                        //TODO: Complete the admin of this state
+                                        //animator, initialize, exe, finalize
+                                    }
+                                    else
+                                    {
+                                        StartCoroutine(CoolDown());
+                                    }
+                                }
+                                break;
+                            default:
+                                _currentHealthPoints -= other.gameObject.GetComponent<HitBox>().GetDamage;
+
+                                if (_currentHealthPoints <= 0)
+                                {
+                                    _agent.StateMechanic(StateMechanics.DIE);
+                                    //TODO: Complete the admin of this state
+                                    //animator, initialize, exe, finalize
+                                }
+                                else
+                                {
+                                    StartCoroutine(CoolDown());
+                                }
+                                break;
                         }
-                        else
-                        {
-                            StartCoroutine(CoolDown());
-                        }
+                        //_currentHealthPoints--;
+                        
 
                     }
                 }

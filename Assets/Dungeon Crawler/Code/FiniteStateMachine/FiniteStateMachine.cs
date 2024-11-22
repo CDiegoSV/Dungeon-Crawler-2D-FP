@@ -62,15 +62,17 @@ namespace Dante.DungeonCrawler
     {
         #region Knobs
 
+        [SerializeField] protected float walkSpeed;
+        [SerializeField] protected float sprintSpeed;
 
         #endregion
 
         #region References
 
-        [SerializeField,HideInInspector] protected Animator _animator;
+        [SerializeField, HideInInspector] protected Animator _animator;
         [SerializeField,HideInInspector] protected Rigidbody2D _rigidbody;
 
-
+        [SerializeField] protected AnimationClip _deathClip;
 
         #endregion
 
@@ -78,7 +80,7 @@ namespace Dante.DungeonCrawler
 
         [SerializeField] protected States _state;
         [SerializeField] protected Vector2 _movementDirection;
-        [SerializeField] protected float _movementSpeed;
+        [SerializeField] protected float _currentMovementSpeed;
 
         [SerializeField] protected Agent _agent;
 
@@ -95,6 +97,7 @@ namespace Dante.DungeonCrawler
         {
             foreach (StateMechanics stateMechanic in Enum.GetValues(typeof(StateMechanics)))
             {
+                //print( "CleanAnimatorFlags() from: " + gameObject.name + ": animator string: " + stateMechanic.ToString());
                 _animator.SetBool(stateMechanic.ToString(), false);
             }
         }
@@ -155,7 +158,7 @@ namespace Dante.DungeonCrawler
                 case States.ATTACKING:
                     if (_agent as PlayersAvatar)
                     {
-                        ((PlayersAvatar)_agent).ActivateHitBox();
+                        ExecutingAttackingState();
                     }
                     break;
                 case States.SPRINTING_UP:
@@ -191,7 +194,7 @@ namespace Dante.DungeonCrawler
                 case States.ATTACKING:
                     if (_agent as PlayersAvatar)
                     {
-                        ((PlayersAvatar)_agent).ActivateHitBox();
+                        FinalizeAttackingState();
                     }
                     break;
                 case States.SPRINTING_UP:
@@ -214,7 +217,7 @@ namespace Dante.DungeonCrawler
         #region IdleState
         protected virtual void InitializeIdleState()
         {
-            _movementSpeed = 0.0f;
+            _currentMovementSpeed = 0.0f;
         }
 
         protected virtual void ExecutingIdleState()
@@ -230,7 +233,7 @@ namespace Dante.DungeonCrawler
         #region MovingState
         protected virtual void InitializeMovingState()
         {
-            _movementSpeed = 5.0f;
+            _currentMovementSpeed = walkSpeed;
         }
 
         protected virtual void ExecutingMovingState()
@@ -248,7 +251,6 @@ namespace Dante.DungeonCrawler
         {
             ((PlayersAvatar)_agent).ActivateHitBox();
             SetMovementSpeed = 0.0f;
-            StateMechanic(StateMechanics.MOVE_DOWN);
         }
 
         protected virtual void ExecutingAttackingState()
@@ -257,14 +259,33 @@ namespace Dante.DungeonCrawler
         }
         protected virtual void FinalizeAttackingState()
         {
+            //if (_agent as PlayersAvatar)
+            //{
+            //    PlayersAvatar tempPlayerAvatar = (PlayersAvatar)_agent;
+            //    if (tempPlayerAvatar.GetMovementInputVector != Vector2.zero && !tempPlayerAvatar.IsSprinting)
+            //    {
+            //        print("Attack movement check");
+            //        StateMechanic(_agent.GetMovementStateMechanic);
+            //    }
+            //    else if (tempPlayerAvatar.GetMovementInputVector != Vector2.zero && tempPlayerAvatar.IsSprinting)
+            //    {
+            //        print("Attack movement check");
+            //        StateMechanic(_agent.GetMovementStateMechanic);
 
+            //    }
+            //    else if (tempPlayerAvatar.GetMovementInputVector == Vector2.zero)
+            //    {
+            //        print("Attack movement check");
+            //        StateMechanic(StateMechanics.STOP);
+            //    }
+            //}
         }
         #endregion AttackingState
 
         #region SprintingState
         protected virtual void InitializeSprintingState()
         {
-            _movementSpeed = 12.5f;
+            _currentMovementSpeed = sprintSpeed;
         }
 
         protected virtual void ExecutingSprintingState()
@@ -280,7 +301,18 @@ namespace Dante.DungeonCrawler
         #region DeathState
         protected virtual void InitializeDeathState()
         {
+            if(_agent as EnemyNPC)
+            {
+                
+            }
+            else if(_agent as PlayersAvatar)
+            {
 
+            }
+            else if(_agent as DestroyableObjects)
+            {
+
+            }
         }
 
         protected virtual void ExecutingDeathState()
@@ -317,7 +349,7 @@ namespace Dante.DungeonCrawler
 
         private void FixedUpdate()
         {
-            _rigidbody.velocity = _movementDirection * _movementSpeed;
+            _rigidbody.velocity = _movementDirection * _currentMovementSpeed;
         }
 
         #endregion
@@ -328,6 +360,7 @@ namespace Dante.DungeonCrawler
         public void StateMechanic(StateMechanics value)
         {
             FinalizeState();
+            CleanAnimatorFlags();
             _animator.SetBool(value.ToString(), true);
         }
 
@@ -336,6 +369,17 @@ namespace Dante.DungeonCrawler
             CleanAnimatorFlags();
             _state = value;
             InitializeState();
+        }
+
+        #endregion
+
+        #region Coroutines
+
+        private IEnumerator EnemyDeathCoroutine()
+        {
+
+            yield return new WaitForSeconds(_deathClip.length);
+            _agent.gameObject.SetActive(false);
         }
 
         #endregion
@@ -354,7 +398,7 @@ namespace Dante.DungeonCrawler
 
         public float SetMovementSpeed
         {
-            set { _movementSpeed = value; }
+            set { _currentMovementSpeed = value; }
         }
 
         public States GetCurrentState

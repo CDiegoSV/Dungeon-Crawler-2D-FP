@@ -1,0 +1,15 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: DestroyableObject_Vessel_AnimatorControllerOverride
+  m_Controller: {fileID: 9100000, guid: 5539fb3a97a0a8144bd3aef8207376f7, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 355294c9b3d4dd847b81563c01ce5a9f, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 76df7ea1e7ae50040a978d9452b16a87, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 6368c04bb437dfe42b7785bc47b8dbe9, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: d4c558a4543dc0c448471f79e838cbb1, type: 2}

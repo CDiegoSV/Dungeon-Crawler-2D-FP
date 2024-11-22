@@ -50,8 +50,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4508728809516688367, guid: d5b6008c36a72cd4dafacd6daf957cd1, type: 3}
       propertyPath: m_Name
-      value: DestroyableObject_Vessel Variant
+      value: DestroyableObject_Vessel
       objectReference: {fileID: 0}
+    - target: {fileID: 8998276403885838987, guid: d5b6008c36a72cd4dafacd6daf957cd1, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 22100000, guid: 678434d05d300f343a234b370150871a, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

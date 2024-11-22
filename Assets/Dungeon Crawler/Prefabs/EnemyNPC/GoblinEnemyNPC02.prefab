@@ -50,16 +50,40 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1924325280389380605, guid: bea63977193ced44890d7c209cbabdac, type: 3}
       propertyPath: m_Name
-      value: GoblinEnemyNPC
+      value: GoblinEnemyNPC02
       objectReference: {fileID: 0}
+    - target: {fileID: 4596535123460400308, guid: bea63977193ced44890d7c209cbabdac, type: 3}
+      propertyPath: scriptBehaviours
+      value: 
+      objectReference: {fileID: 11400000, guid: 5af19352e76930341ab79a111f9ecf12, type: 2}
     - target: {fileID: 6397055293645342873, guid: bea63977193ced44890d7c209cbabdac, type: 3}
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 22100000, guid: 72b71f831e3e175438e8b83ee234467f, type: 2}
+    - target: {fileID: 6482758371258725771, guid: bea63977193ced44890d7c209cbabdac, type: 3}
+      propertyPath: _hurtBoxSO
+      value: 
+      objectReference: {fileID: 11400000, guid: 3295139047bdf4146b73c8668530b17f, type: 2}
+    - target: {fileID: 8250225224506760886, guid: bea63977193ced44890d7c209cbabdac, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 8546324871630455923, guid: bea63977193ced44890d7c209cbabdac, type: 3}
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: -1424868642294795106, guid: 4c16e5972ac5d744894dc6faa29929ef, type: 3}
+    - target: {fileID: 8546324871630455923, guid: bea63977193ced44890d7c209cbabdac, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8546324871630455923, guid: bea63977193ced44890d7c209cbabdac, type: 3}
+      propertyPath: m_Color.g
+      value: 0.02821736
+      objectReference: {fileID: 0}
+    - target: {fileID: 8546324871630455923, guid: bea63977193ced44890d7c209cbabdac, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

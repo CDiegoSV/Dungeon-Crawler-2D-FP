@@ -37,6 +37,8 @@ namespace Dante.DungeonCrawler
         protected Vector2 _movementDirection;
         protected StateMechanics _movementStateMechanic;
 
+        protected bool _isSprinting;
+
         #endregion
 
         #region LocalMethods
@@ -45,19 +47,47 @@ namespace Dante.DungeonCrawler
         {
             if (Vector2.Dot(_fsm.GetMovementDirection, Vector2.down) >= 0.5f)
             {
-                _movementStateMechanic = StateMechanics.MOVE_DOWN;
+                if (!_isSprinting)
+                {
+                    _movementStateMechanic = StateMechanics.MOVE_DOWN;
+                }
+                else
+                {
+                    _movementStateMechanic = StateMechanics.SPRINT_DOWN;
+                }
             }
             else if (Vector2.Dot(_fsm.GetMovementDirection, Vector2.right) >= 0.5f)
             {
-                _movementStateMechanic = StateMechanics.MOVE_RIGHT;
+                if (!_isSprinting)
+                {
+                    _movementStateMechanic = StateMechanics.MOVE_RIGHT;
+                }
+                else
+                {
+                    _movementStateMechanic = StateMechanics.SPRINT_RIGHT;
+                }
             }   
             else if (Vector2.Dot(_fsm.GetMovementDirection, Vector2.up) >= 0.5f)
             {
-                _movementStateMechanic = StateMechanics.MOVE_UP;
+                if (!_isSprinting)
+                {
+                    _movementStateMechanic = StateMechanics.MOVE_UP;
+                }
+                else
+                {
+                    _movementStateMechanic = StateMechanics.SPRINT_UP;
+                }
             }
             else
             {
-                _movementStateMechanic = StateMechanics.MOVE_LEFT;
+                if (!_isSprinting)
+                {
+                    _movementStateMechanic = StateMechanics.MOVE_LEFT;
+                }
+                else
+                {
+                    _movementStateMechanic = StateMechanics.SPRINT_LEFT;
+                }
             }
         }
 
@@ -94,6 +124,7 @@ namespace Dante.DungeonCrawler
 
         public virtual void InitializeAgent()
         {
+            _isSprinting = false;
             //With the RequireComponent we guarantee
             //this reference will be ALWAYS retreived
             /*
@@ -112,6 +143,11 @@ namespace Dante.DungeonCrawler
         #endregion
 
         #region GettersSetters
+
+        public StateMechanics GetMovementStateMechanic
+        {
+            get { return _movementStateMechanic; }
+        }
 
         #endregion
     }

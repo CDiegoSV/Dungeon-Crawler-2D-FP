@@ -11,7 +11,7 @@ namespace Dante.DungeonCrawler
 
         public int damage = 1;
 
-        public float lifeTime = 1f;
+        public AnimationClip hitAnimation;
 
         #endregion
 
@@ -60,7 +60,7 @@ namespace Dante.DungeonCrawler
             _isHitBoxActive = true;
             _collider.enabled = true;
 
-            yield return new WaitForSeconds(lifeTime);
+            yield return new WaitForSeconds(hitAnimation.length);
 
             _collider.enabled = false;
             _isHitBoxActive = false;

@@ -50,12 +50,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1924325280389380605, guid: bea63977193ced44890d7c209cbabdac, type: 3}
       propertyPath: m_Name
-      value: TrasgoEnemyNPC
+      value: TrasgoEnemyNPC01
       objectReference: {fileID: 0}
     - target: {fileID: 6397055293645342873, guid: bea63977193ced44890d7c209cbabdac, type: 3}
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 22100000, guid: 60f62f191b9db1147a906d2827edf810, type: 2}
+    - target: {fileID: 6482758371258725771, guid: bea63977193ced44890d7c209cbabdac, type: 3}
+      propertyPath: _hurtBoxSO
+      value: 
+      objectReference: {fileID: 11400000, guid: 56d81b093f940d942a7cd25124c23a45, type: 2}
+    - target: {fileID: 8250225224506760886, guid: bea63977193ced44890d7c209cbabdac, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.y
+      value: 0.41
+      objectReference: {fileID: 0}
     - target: {fileID: 8546324871630455923, guid: bea63977193ced44890d7c209cbabdac, type: 3}
       propertyPath: m_Sprite
       value: 

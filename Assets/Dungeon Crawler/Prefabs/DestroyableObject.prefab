@@ -108,10 +108,18 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 7996550187066274308, guid: ab90cba76176bc44f9b70b84ee440fb0, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 22100000, guid: 7776499babf3a7340a6cf3bdab04b64d, type: 2}
     - target: {fileID: 8054953494223294230, guid: ab90cba76176bc44f9b70b84ee440fb0, type: 3}
       propertyPath: _agent
       value: 
       objectReference: {fileID: 8918750804854437810}
+    - target: {fileID: 8054953494223294230, guid: ab90cba76176bc44f9b70b84ee440fb0, type: 3}
+      propertyPath: _hurtBoxSO
+      value: 
+      objectReference: {fileID: 11400000, guid: 47c1daf223578464da4a14b817cb9ea2, type: 2}
     - target: {fileID: 8252346721500424340, guid: ab90cba76176bc44f9b70b84ee440fb0, type: 3}
       propertyPath: _agent
       value: 
@@ -119,7 +127,7 @@ PrefabInstance:
     - target: {fileID: 8252346721500424340, guid: ab90cba76176bc44f9b70b84ee440fb0, type: 3}
       propertyPath: _animator
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 8998276403885838987}
     m_RemovedComponents:
     - {fileID: 2660077242759885590, guid: ab90cba76176bc44f9b70b84ee440fb0, type: 3}
     m_RemovedGameObjects: []
@@ -165,3 +173,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0bde01278646ef4d96054a83d7a46c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &8998276403885838987 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 7996550187066274308, guid: ab90cba76176bc44f9b70b84ee440fb0, type: 3}
+  m_PrefabInstance: {fileID: 1304135904067985551}
+  m_PrefabAsset: {fileID: 0}

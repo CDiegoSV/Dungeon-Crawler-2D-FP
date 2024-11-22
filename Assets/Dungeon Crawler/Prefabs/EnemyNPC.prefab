@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1034084701641363678, guid: ab90cba76176bc44f9b70b84ee440fb0, type: 3}
+      propertyPath: _collider
+      value: 
+      objectReference: {fileID: 2724095044259478836}
     - target: {fileID: 1437349632472811433, guid: ab90cba76176bc44f9b70b84ee440fb0, type: 3}
       propertyPath: m_Size.x
       value: 1
@@ -80,6 +84,18 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 8054953494223294230, guid: ab90cba76176bc44f9b70b84ee440fb0, type: 3}
+      propertyPath: _agent
+      value: 
+      objectReference: {fileID: 4596535123460400308}
+    - target: {fileID: 8054953494223294230, guid: ab90cba76176bc44f9b70b84ee440fb0, type: 3}
+      propertyPath: _hurtBoxSO
+      value: 
+      objectReference: {fileID: 11400000, guid: bb5cfbab1a64b4049b7fb3794ebcdec5, type: 2}
+    - target: {fileID: 8252346721500424340, guid: ab90cba76176bc44f9b70b84ee440fb0, type: 3}
+      propertyPath: _agent
+      value: 
+      objectReference: {fileID: 4596535123460400308}
     m_RemovedComponents:
     - {fileID: 2660077242759885590, guid: ab90cba76176bc44f9b70b84ee440fb0, type: 3}
     m_RemovedGameObjects: []
@@ -112,7 +128,7 @@ MonoBehaviour:
   maxHealthPoints: 3
   _rigidbody: {fileID: 8044921885514000781}
   _fsm: {fileID: 4952176715906159113}
-  scriptBehaviours: {fileID: 11400000, guid: 35a780a15e68ef947a69b645c34ab9da, type: 2}
+  scriptBehaviours: {fileID: 11400000, guid: 5af19352e76930341ab79a111f9ecf12, type: 2}
 --- !u!58 &626658013357685539
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -148,6 +164,11 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 4
+--- !u!61 &2724095044259478836 stripped
+BoxCollider2D:
+  m_CorrespondingSourceObject: {fileID: 1437349632472811433, guid: ab90cba76176bc44f9b70b84ee440fb0, type: 3}
+  m_PrefabInstance: {fileID: 3909005602917481117}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &4952176715906159113 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8252346721500424340, guid: ab90cba76176bc44f9b70b84ee440fb0, type: 3}
