@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace SotomaYorch.DungeonCrawler
+namespace Dante.DungeonCrawler
 {
     #region Enums
 
@@ -214,7 +214,7 @@ namespace SotomaYorch.DungeonCrawler
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.gameObject.tag == "Player")
+            if (other.gameObject.CompareTag("Player"))
             {
                 _avatarsTransform = other.gameObject.transform;
                 InitializePersecutionBehaviour();
@@ -223,7 +223,7 @@ namespace SotomaYorch.DungeonCrawler
 
         private void OnTriggerExit2D(Collider2D other)
         {
-            if (other.gameObject.tag == "Player")
+            if (other.gameObject.CompareTag("Player"))
             {
                 _avatarsTransform = null;
                 InitializePatrolBehaviour();

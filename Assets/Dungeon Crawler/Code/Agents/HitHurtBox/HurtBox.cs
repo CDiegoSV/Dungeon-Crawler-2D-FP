@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace SotomaYorch.DungeonCrawler
+namespace Dante.DungeonCrawler
 {
 
     [RequireComponent(typeof(Collider2D))]
@@ -10,9 +10,7 @@ namespace SotomaYorch.DungeonCrawler
     {
         #region Knobs
 
-        //TODO: Make an SO.
-        public int maxHealthPoints = 3;
-        public float coolDownTime = 1f;
+        [SerializeField] HurtBox_ScriptableObject _hurtBoxSO;
 
         #endregion
 
@@ -34,7 +32,7 @@ namespace SotomaYorch.DungeonCrawler
 
         private void Start()
         {
-            _currentHealthPoints = maxHealthPoints;
+            _currentHealthPoints = _hurtBoxSO.hurtBoxValues.maxHealthPoints;
         }
 
         private void OnDrawGizmos()
@@ -82,7 +80,7 @@ namespace SotomaYorch.DungeonCrawler
         IEnumerator CoolDown()
         {
             _isInCooldown = true;
-            yield return new WaitForSeconds(coolDownTime);
+            yield return new WaitForSeconds(_hurtBoxSO.hurtBoxValues.cooldownPerHit);
             _isInCooldown = false;
         }
 

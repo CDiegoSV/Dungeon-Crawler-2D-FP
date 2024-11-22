@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace SotomaYorch.DungeonCrawler
+namespace Dante.DungeonCrawler
 {
     #region Enum
 

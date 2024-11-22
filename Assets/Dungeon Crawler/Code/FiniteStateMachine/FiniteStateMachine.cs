@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace SotomaYorch.DungeonCrawler
+namespace Dante.DungeonCrawler
 {
     #region Enums
 
@@ -20,7 +20,12 @@ namespace SotomaYorch.DungeonCrawler
         MOVING_RIGHT,
         MOVING_LEFT,
 
-        ATTACK,
+        SPRINTING_UP,
+        SPRINTING_DOWN,
+        SPRINTING_LEFT,
+        SPRINTING_RIGHT,
+
+        ATTACKING,
 
         DEATH //TODO: Complete code to admin new states.
     }
@@ -34,6 +39,12 @@ namespace SotomaYorch.DungeonCrawler
         MOVE_DOWN,
         MOVE_LEFT,
         MOVE_RIGHT,
+
+        SPRINT_UP,
+        SPRINT_DOWN,
+        SPRINT_LEFT,
+        SPRINT_RIGHT,
+
         //ATTACK
         ATTACK,
 
@@ -88,24 +99,204 @@ namespace SotomaYorch.DungeonCrawler
             }
         }
 
-        protected void InitializeState()
+        public void InitializeState()
         {
-            switch(_state)
+            switch (_state)
             {
-                case States.DEATH:
-                    //Death
+                case States.IDLE_UP:
+                case States.IDLE_DOWN:
+                case States.IDLE_LEFT:
+                case States.IDLE_RIGHT:
+                    InitializeIdleState();
                     break;
-                case States.ATTACK:
+                case States.MOVING_UP:
+                case States.MOVING_DOWN:
+                case States.MOVING_LEFT:
+                case States.MOVING_RIGHT:
+                    InitializeMovingState();
+                    break;
+
+                case States.ATTACKING:
                     if(_agent as PlayersAvatar)
                     {
-                        ((PlayersAvatar)_agent).ActivateHitBox();
-                        _movementSpeed = 0;
+                        InitializeAttackingState();
                     }
+                    break;
+                case States.SPRINTING_UP:
+                case States.SPRINTING_LEFT:
+                case States.SPRINTING_RIGHT:
+                case States.SPRINTING_DOWN:
+                    InitializeSprintingState();
+                    break;
+
+                case States.DEATH:
+                    InitializeDeathState();
+                    //gameObject.SetActive(false); //PROTOTYPE TO DELETE
                     break;
             }
         }
 
+        public void ExecutingState()
+        {
+            switch (_state)
+            {
+                case States.IDLE_UP:
+                case States.IDLE_DOWN:
+                case States.IDLE_LEFT:
+                case States.IDLE_RIGHT:
+                    ExecutingIdleState();
+                    break;
+                case States.MOVING_UP:
+                case States.MOVING_DOWN:
+                case States.MOVING_LEFT:
+                case States.MOVING_RIGHT:
+                    ExecutingMovingState();
+                    break;
+                case States.ATTACKING:
+                    if (_agent as PlayersAvatar)
+                    {
+                        ((PlayersAvatar)_agent).ActivateHitBox();
+                    }
+                    break;
+                case States.SPRINTING_UP:
+                case States.SPRINTING_LEFT:
+                case States.SPRINTING_RIGHT:
+                case States.SPRINTING_DOWN:
+                    ExecutingSprintingState();
+                    break;
+
+                case States.DEATH:
+                    ExecutingDeathState();
+                    //gameObject.SetActive(false); //PROTOTYPE TO DELETE
+                    break;
+            }
+        }
+
+        public void FinalizeState()
+        {
+            switch (_state)
+            {
+                case States.IDLE_UP:
+                case States.IDLE_DOWN:
+                case States.IDLE_LEFT:
+                case States.IDLE_RIGHT:
+                    FinalizeIdleState();
+                    break;
+                case States.MOVING_UP:
+                case States.MOVING_DOWN:
+                case States.MOVING_LEFT:
+                case States.MOVING_RIGHT:
+                    FinalizeMovingState();
+                    break;
+                case States.ATTACKING:
+                    if (_agent as PlayersAvatar)
+                    {
+                        ((PlayersAvatar)_agent).ActivateHitBox();
+                    }
+                    break;
+                case States.SPRINTING_UP:
+                case States.SPRINTING_LEFT:
+                case States.SPRINTING_RIGHT:
+                case States.SPRINTING_DOWN:
+                    FinalizeSprintingState();
+                    break;
+
+                case States.DEATH:
+                    FinalizeDeathState();
+                    //gameObject.SetActive(false); //PROTOTYPE TO DELETE
+                    break;
+            }
+        }
+
+
+        #region FiniteStateMachineStates
+
+        #region IdleState
+        protected virtual void InitializeIdleState()
+        {
+            _movementSpeed = 0.0f;
+        }
+
+        protected virtual void ExecutingIdleState()
+        {
+
+        }
+        protected virtual void FinalizeIdleState()
+        {
+
+        }
+        #endregion IdleState
+
+        #region MovingState
+        protected virtual void InitializeMovingState()
+        {
+            _movementSpeed = 5.0f;
+        }
+
+        protected virtual void ExecutingMovingState()
+        {
+
+        }
+        protected virtual void FinalizeMovingState()
+        {
+
+        }
+        #endregion MovingState
+
+        #region AttackingState
+        protected virtual void InitializeAttackingState()
+        {
+            ((PlayersAvatar)_agent).ActivateHitBox();
+            SetMovementSpeed = 0.0f;
+            StateMechanic(StateMechanics.MOVE_DOWN);
+        }
+
+        protected virtual void ExecutingAttackingState()
+        {
+
+        }
+        protected virtual void FinalizeAttackingState()
+        {
+
+        }
+        #endregion AttackingState
+
+        #region SprintingState
+        protected virtual void InitializeSprintingState()
+        {
+            _movementSpeed = 12.5f;
+        }
+
+        protected virtual void ExecutingSprintingState()
+        {
+
+        }
+        protected virtual void FinalizeSprintingState()
+        {
+
+        }
+        #endregion SprintingState
+
+        #region DeathState
+        protected virtual void InitializeDeathState()
+        {
+
+        }
+
+        protected virtual void ExecutingDeathState()
+        {
+
+        }
+        protected virtual void FinalizeDeathState()
+        {
+
+        }
+        #endregion InteractingState
+
+        #endregion FiniteStateMachineStates
+
         #endregion
+
 
         #region UnityMethods
 
@@ -136,6 +327,7 @@ namespace SotomaYorch.DungeonCrawler
         //Action
         public void StateMechanic(StateMechanics value)
         {
+            FinalizeState();
             _animator.SetBool(value.ToString(), true);
         }
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace SotomaYorch.DungeonCrawler
+namespace Dante.DungeonCrawler
 {
     #region Enums
 
@@ -40,6 +40,8 @@ namespace SotomaYorch.DungeonCrawler
         #region RuntimeVariables
 
         protected Vector2 _movementInputVector;
+        protected bool _isInteracting;
+        protected bool _isCarrying;
 
         #endregion
 
@@ -95,7 +97,7 @@ namespace SotomaYorch.DungeonCrawler
             {
                 _movementInputVector = value.ReadValue<Vector2>();
                 _fsm.SetMovementDirection = _movementInputVector;
-                if (_fsm.GetCurrentState != States.ATTACK)
+                if (_fsm.GetCurrentState != States.ATTACKING)
                 {
                     _fsm.SetMovementSpeed = 3.0f;
                 }
@@ -113,26 +115,28 @@ namespace SotomaYorch.DungeonCrawler
 
         public void OnATTACK(InputAction.CallbackContext value)
         {
-            if (value.performed)
+            if(!_isCarrying)
             {
-                _fsm.StateMechanic(StateMechanics.ATTACK);
-                _fsm.SetMovementSpeed = 0.0f;
+                if (value.performed)
+                {
+                    _fsm.StateMechanic(StateMechanics.ATTACK);
+                }
             }
-            else if (value.canceled)
-            {
-                
-            }
+            
         }
 
         public void OnSPRINT(InputAction.CallbackContext value)
         {
-            if (value.performed)
+            if (!_isCarrying)
             {
+                if (value.performed)
+                {
 
-            }
-            else if (value.canceled)
-            {
+                }
+                else if (value.canceled)
+                {
 
+                }
             }
         }
 
@@ -152,11 +156,11 @@ namespace SotomaYorch.DungeonCrawler
         {
             if (value.performed)
             {
-
+                _isInteracting = true;
             }
             else if (value.canceled)
             {
-
+                _isInteracting = false;
             }
         }
 
@@ -164,7 +168,9 @@ namespace SotomaYorch.DungeonCrawler
 
         #region GettersSetters
 
+        public bool IsInteracting { get { return _isInteracting; } }
 
+        public bool SetIsCarrying { set { _isCarrying = value; } }
 
         #endregion
     }

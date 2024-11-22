@@ -9,17 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 661a796e5f5676c4f82095d66b991432, type: 3}
-  m_Name: BasicEnemyNPC_SO
+  m_Script: {fileID: 11500000, guid: 36dfbb31dac49ce4ea1cb6a457e63ec5, type: 3}
+  m_Name: EnemyNPC_Goblin01_SO
   m_EditorClassIdentifier: 
-  patrolBehaviours:
-  - type: 0
-    speed: 0
-    time: 3
-  - type: 1
-    speed: 1
-    time: 5
-  persecutionBehaviours:
-  - type: 3
-    speed: 2
-    time: 3
+  agentType: 1
+  hurtBoxValues:
+    maxHealthPoints: 2
+    cooldownPerHit: 1

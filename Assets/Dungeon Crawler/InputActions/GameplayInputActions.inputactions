@@ -219,17 +219,6 @@
                 },
                 {
                     "name": "",
-                    "id": "89201577-f331-42e6-ba03-5eb2c48bc16b",
-                    "path": "",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "SPRINT",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "877235f3-5519-48b6-ad61-a0e46de9b671",
                     "path": "",
                     "interactions": "",
@@ -242,11 +231,33 @@
                 {
                     "name": "",
                     "id": "a98e9e57-6c73-4271-9955-d98a90e59262",
-                    "path": "",
+                    "path": "<Gamepad>/buttonEast",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "INTERACT",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "539addf7-9e30-4b95-8775-c42b3d3ab5b9",
+                    "path": "<Keyboard>/shift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SPRINT",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0ca7cdb5-4479-4c47-a4d1-21e57b4f6715",
+                    "path": "<Gamepad>/leftTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SPRINT",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

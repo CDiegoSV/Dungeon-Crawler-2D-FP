@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using SotomaYorch.DungeonCrawler;
+using Dante.DungeonCrawler;
 
 public class PolymorphismTest : MonoBehaviour
 {
