@@ -14,15 +14,23 @@ PrefabInstance:
       objectReference: {fileID: 4290407801411238382}
     - target: {fileID: 1437349632472811433, guid: ab90cba76176bc44f9b70b84ee440fb0, type: 3}
       propertyPath: m_Size.x
-      value: 1.1
+      value: 1.88
       objectReference: {fileID: 0}
     - target: {fileID: 1437349632472811433, guid: ab90cba76176bc44f9b70b84ee440fb0, type: 3}
       propertyPath: m_Size.y
-      value: 1.1
+      value: 1.22
       objectReference: {fileID: 0}
     - target: {fileID: 1437349632472811433, guid: ab90cba76176bc44f9b70b84ee440fb0, type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1437349632472811433, guid: ab90cba76176bc44f9b70b84ee440fb0, type: 3}
+      propertyPath: m_Offset.x
+      value: 0.18
+      objectReference: {fileID: 0}
+    - target: {fileID: 1437349632472811433, guid: ab90cba76176bc44f9b70b84ee440fb0, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.24
       objectReference: {fileID: 0}
     - target: {fileID: 2742683217258075477, guid: ab90cba76176bc44f9b70b84ee440fb0, type: 3}
       propertyPath: m_LocalPosition.x
@@ -100,6 +108,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 4153643460065611207, guid: ab90cba76176bc44f9b70b84ee440fb0, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4658189665935228654, guid: ab90cba76176bc44f9b70b84ee440fb0, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -145,6 +157,10 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8252346721500424340, guid: ab90cba76176bc44f9b70b84ee440fb0, type: 3}
+      propertyPath: _deathClip
+      value: 
+      objectReference: {fileID: 7400000, guid: 83accbd7213e31e43a2098eb13d608b0, type: 2}
+    - target: {fileID: 8252346721500424340, guid: ab90cba76176bc44f9b70b84ee440fb0, type: 3}
       propertyPath: sprintSpeed
       value: 8
       objectReference: {fileID: 0}
@@ -179,6 +195,9 @@ MonoBehaviour:
   _fsm: {fileID: 6556910479042582227}
   playerIndex: 0
   _hitBox: {fileID: 2747517136271650457}
+  _movementInputVector: {x: 0, y: 0}
+  _isInteracting: 0
+  _isCarrying: 0
 --- !u!114 &2747517136271650457 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1034084701641363678, guid: ab90cba76176bc44f9b70b84ee440fb0, type: 3}

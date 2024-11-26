@@ -24,18 +24,20 @@ namespace Dante.DungeonCrawler
         #region Knobs
 
         public EnemyBehaviours_ScriptableObject scriptBehaviours;
+        public bool isEnemyProjectile;
 
         #endregion
 
         #region References
 
+        [SerializeField] protected GameObject enemyProjectile;
 
         #endregion
 
         #region RuntimeVariables
 
         protected EnemyBehaviourState _currentEnemyBehaviourState;
-        protected EnemyBehaviour _currentEnemyBehaviour;
+        [SerializeField] protected EnemyBehaviour _currentEnemyBehaviour;
         protected int _currentEnemyBehaviourIndex;
         protected Transform _avatarsTransform;
         protected StateMechanics _previousMovementStateMechanic;
@@ -59,6 +61,9 @@ namespace Dante.DungeonCrawler
                     //TODO: Obtain the State Mechanic direction, 
                     //according to the direction of the enemy
                     _fsm.StateMechanic(_movementStateMechanic);
+                    break;
+                case EnemyBehaviourType.DEACTIVATE:
+                    gameObject.SetActive(false);
                     break;
             }
         }
@@ -109,6 +114,9 @@ namespace Dante.DungeonCrawler
                 case EnemyBehaviourType.PERSECUTE_THE_AVATAR:
                     InitializePersecuteTheAvatarSubStateMachine();
                     break;
+                case EnemyBehaviourType.FIRE:
+                    InitializeFireSubStateMachine();
+                    break;
             }
         }
 
@@ -124,6 +132,9 @@ namespace Dante.DungeonCrawler
                     break;
                 case EnemyBehaviourType.PERSECUTE_THE_AVATAR:
                     FinalizePersecuteTheAvatarSubStateMachine();
+                    break;
+                case EnemyBehaviourType.FIRE:
+                    FinalizeFireSubStateMachine();
                     break;
             }
         }
@@ -149,7 +160,7 @@ namespace Dante.DungeonCrawler
             InitializeSubState();
             CalculateStateMechanicDirection();
             InvokeStateMechanic();
-            if (_currentEnemyBehaviour.time > 0)
+            if (_currentEnemyBehaviour.time > 0 && gameObject.activeSelf)
             {
                 //It is not a perpetual finite state,
                 //so we will start the clock ;)
@@ -191,6 +202,15 @@ namespace Dante.DungeonCrawler
             InitializeAgent();
         }
 
+        private void OnEnable()
+        {
+            _fsm.SetAllMovementSpeeds = _currentEnemyBehaviour.speed;
+            if(isEnemyProjectile)
+            {
+                transform.localPosition = Vector3.zero;
+            }
+        }
+
         private void OnDisable()
         {
             StopAllCoroutines();
@@ -208,6 +228,9 @@ namespace Dante.DungeonCrawler
                     break;
                 case EnemyBehaviourType.PERSECUTE_THE_AVATAR:
                     ExecutingPersecuteTheAvatarSubStateMachine();
+                    break;
+                case EnemyBehaviourType.FIRE:
+                    ExecutingFireSubStateMachine();
                     break;
             }
         }
@@ -251,7 +274,7 @@ namespace Dante.DungeonCrawler
 
         protected void InitializeStopSubStateMachine()
         {
-            _fsm.SetMovementSpeed = 0.0f;
+            _fsm.SetAllMovementSpeeds = _currentEnemyBehaviour.speed;
             _fsm.SetMovementDirection = Vector2.zero;
         }
 
@@ -280,7 +303,7 @@ namespace Dante.DungeonCrawler
             } while (_movementDirection.magnitude == 0.0f);
             _fsm.SetMovementDirection = _movementDirection;
             
-            _fsm.SetMovementSpeed = _currentEnemyBehaviour.speed;
+            _fsm.SetAllMovementSpeeds = _currentEnemyBehaviour.speed;
         }
 
         protected void ExecutingMoveToRandomDirectionSubStateMachine()
@@ -291,7 +314,7 @@ namespace Dante.DungeonCrawler
         protected void FinalizeMoveToRandomDirectionSubStateMachine()
         {
             _fsm.SetMovementDirection = Vector2.zero;
-            _fsm.SetMovementSpeed = 0.0f;
+            _fsm.SetAllMovementSpeeds = _currentEnemyBehaviour.speed;
         }
 
         #endregion MoveToRandomDirectionSubStateMachineMethods
@@ -300,8 +323,23 @@ namespace Dante.DungeonCrawler
 
         protected void InitializePersecuteTheAvatarSubStateMachine()
         {
+            if(isEnemyProjectile)
+            {
+                float _lastShorterDistance = 100f;
+                GameObject _lastCloserPlayer = null;
+                GameObject[] allPlayersInScene = GameObject.FindGameObjectsWithTag("Player");
+                for (int i = 0; i < allPlayersInScene.Length; i++)
+                {
+                    if (allPlayersInScene[i].activeSelf && _lastShorterDistance > Vector2.Distance(transform.position, allPlayersInScene[i].gameObject.transform.position))
+                    {
+                        _lastShorterDistance = Vector2.Distance(transform.position, allPlayersInScene[i].gameObject.transform.position);
+                        _lastCloserPlayer = allPlayersInScene[i];
+                    }
+                }
+                _avatarsTransform = _lastCloserPlayer.transform;
+            }
             _fsm.SetMovementDirection = (_avatarsTransform.position - transform.position).normalized;
-            _fsm.SetMovementSpeed = _currentEnemyBehaviour.speed;
+            _fsm.SetAllMovementSpeeds = _currentEnemyBehaviour.speed;
             _previousMovementStateMechanic = _movementStateMechanic;
         }
 
@@ -319,11 +357,30 @@ namespace Dante.DungeonCrawler
 
         protected void FinalizePersecuteTheAvatarSubStateMachine()
         {
-            _fsm.SetMovementSpeed = 0.0f;
+            _fsm.SetAllMovementSpeeds = _currentEnemyBehaviour.speed;
             _fsm.SetMovementDirection = Vector2.zero;
         }
 
         #endregion PersecuteTheAvatarSubStateMachineMethods
+
+        #region FireSubStateMachineMethods
+
+        protected void InitializeFireSubStateMachine()
+        {
+            enemyProjectile.SetActive(true);
+        }
+
+        protected void ExecutingFireSubStateMachine()
+        {
+
+        }
+
+        protected void FinalizeFireSubStateMachine()
+        {
+
+        }
+
+        #endregion
 
         #endregion SubStateMachineStates
 

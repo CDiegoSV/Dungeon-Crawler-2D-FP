@@ -35,6 +35,11 @@ namespace Dante.DungeonCrawler
             _currentHealthPoints = _hurtBoxSO.hurtBoxValues.maxHealthPoints;
         }
 
+        private void OnEnable()
+        {
+            _currentHealthPoints = _hurtBoxSO.hurtBoxValues.maxHealthPoints;
+        }
+
         private void OnDrawGizmos()
         {
             #if UNITY_EDITOR
@@ -59,32 +64,28 @@ namespace Dante.DungeonCrawler
                             case AgentType.DestroyableObject:
                                 if(other.gameObject.layer != LayerMask.NameToLayer("EnemyNPC"))
                                 {
-                                    _currentHealthPoints -= other.gameObject.GetComponent<HitBox>().GetDamage;
 
-                                    if (_currentHealthPoints <= 0)
+                                    if (_currentHealthPoints == 0)
                                     {
-                                        _agent.StateMechanic(StateMechanics.DIE);
-                                        //TODO: Complete the admin of this state
-                                        //animator, initialize, exe, finalize
+                                        _agent.StateMechanic(StateMechanics.DEATH);
+                                        
                                     }
                                     else
                                     {
-                                        StartCoroutine(CoolDown());
+                                        StartCoroutine(DamageCoolDown(other.gameObject.GetComponent<HitBox>().GetDamage));
                                     }
                                 }
                                 break;
                             default:
-                                _currentHealthPoints -= other.gameObject.GetComponent<HitBox>().GetDamage;
 
-                                if (_currentHealthPoints <= 0)
+                                if (_currentHealthPoints == 0)
                                 {
-                                    _agent.StateMechanic(StateMechanics.DIE);
-                                    //TODO: Complete the admin of this state
-                                    //animator, initialize, exe, finalize
+                                    _agent.StateMechanic(StateMechanics.DEATH);
+                                    
                                 }
                                 else
                                 {
-                                    StartCoroutine(CoolDown());
+                                    StartCoroutine(DamageCoolDown(other.gameObject.GetComponent<HitBox>().GetDamage));
                                 }
                                 break;
                         }
@@ -100,9 +101,10 @@ namespace Dante.DungeonCrawler
 
         #region Coroutines
 
-        IEnumerator CoolDown()
+        IEnumerator DamageCoolDown(int damage)
         {
             _isInCooldown = true;
+            _currentHealthPoints -= damage;
             yield return new WaitForSeconds(_hurtBoxSO.hurtBoxValues.cooldownPerHit);
             _isInCooldown = false;
         }

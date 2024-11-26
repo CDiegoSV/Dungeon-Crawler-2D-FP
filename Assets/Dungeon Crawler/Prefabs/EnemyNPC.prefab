@@ -96,6 +96,10 @@ PrefabInstance:
       propertyPath: _agent
       value: 
       objectReference: {fileID: 4596535123460400308}
+    - target: {fileID: 8252346721500424340, guid: ab90cba76176bc44f9b70b84ee440fb0, type: 3}
+      propertyPath: _deathClip
+      value: 
+      objectReference: {fileID: 7400000, guid: d3814e3302142ef4c8e455706667823d, type: 2}
     m_RemovedComponents:
     - {fileID: 2660077242759885590, guid: ab90cba76176bc44f9b70b84ee440fb0, type: 3}
     m_RemovedGameObjects: []

@@ -21,19 +21,19 @@ public class EnemyCluster : MonoBehaviour
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            for (int i = 0; i < transform.childCount; i++)
-            {
-                if (transform.GetChild(i).gameObject.activeSelf != false)
-                {
-                    transform.GetChild(i).gameObject.SetActive(false);
-                }
-            }
-        }
-    }
+    //private void OnTriggerExit2D(Collider2D collision)
+    //{
+    //    if (collision.gameObject.CompareTag("Player"))
+    //    {
+    //        for (int i = 0; i < transform.childCount; i++)
+    //        {
+    //            if (transform.GetChild(i).gameObject.activeSelf != false)
+    //            {
+    //                transform.GetChild(i).gameObject.SetActive(false);
+    //            }
+    //        }
+    //    }
+    //}
 
     #endregion
 }

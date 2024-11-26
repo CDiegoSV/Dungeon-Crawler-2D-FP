@@ -45,29 +45,59 @@ namespace Dante.DungeonCrawler
 
         protected virtual void CalculateStateMechanicDirection()
         {
-            if (Vector2.Dot(_fsm.GetMovementDirection, Vector2.down) >= 0.5f)
+            if (Vector2.Dot(_fsm.GetMovementDirection, Vector2.down) > 0.1f)
             {
-                if (!_isSprinting)
+                if (Vector2.Dot(_fsm.GetMovementDirection, Vector2.right) > 0.1f)
                 {
-                    _movementStateMechanic = StateMechanics.MOVE_DOWN;
+                    if (!_isSprinting)
+                    {
+                        _movementStateMechanic = StateMechanics.MOVE_RIGHT;
+                    }
+                    else
+                    {
+                        _movementStateMechanic = StateMechanics.SPRINT_RIGHT;
+                    }
                 }
                 else
                 {
-                    _movementStateMechanic = StateMechanics.SPRINT_DOWN;
+                    if (!_isSprinting)
+                    {
+                        _movementStateMechanic = StateMechanics.MOVE_DOWN;
+                    }
+                    else
+                    {
+                        _movementStateMechanic = StateMechanics.SPRINT_DOWN;
+                    }
                 }
+
             }
-            else if (Vector2.Dot(_fsm.GetMovementDirection, Vector2.right) >= 0.5f)
+            else if (Vector2.Dot(_fsm.GetMovementDirection, Vector2.left) > 0.1f)
             {
-                if (!_isSprinting)
+                if (Vector2.Dot(_fsm.GetMovementDirection, Vector2.up) > 0.1f)
                 {
-                    _movementStateMechanic = StateMechanics.MOVE_RIGHT;
+                    if (!_isSprinting)
+                    {
+                        _movementStateMechanic = StateMechanics.MOVE_LEFT;
+                    }
+                    else
+                    {
+                        _movementStateMechanic = StateMechanics.SPRINT_LEFT;
+                    }
                 }
                 else
                 {
-                    _movementStateMechanic = StateMechanics.SPRINT_RIGHT;
+                    if (!_isSprinting)
+                    {
+                        _movementStateMechanic = StateMechanics.MOVE_DOWN;
+                    }
+                    else
+                    {
+                        _movementStateMechanic = StateMechanics.SPRINT_DOWN;
+                    }
                 }
-            }   
-            else if (Vector2.Dot(_fsm.GetMovementDirection, Vector2.up) >= 0.5f)
+
+            }
+            else if (Vector2.Dot(_fsm.GetMovementDirection, Vector2.up) > 0.1f)
             {
                 if (!_isSprinting)
                 {
@@ -82,11 +112,11 @@ namespace Dante.DungeonCrawler
             {
                 if (!_isSprinting)
                 {
-                    _movementStateMechanic = StateMechanics.MOVE_LEFT;
+                    _movementStateMechanic = StateMechanics.MOVE_RIGHT;
                 }
                 else
                 {
-                    _movementStateMechanic = StateMechanics.SPRINT_LEFT;
+                    _movementStateMechanic = StateMechanics.SPRINT_RIGHT;
                 }
             }
         }

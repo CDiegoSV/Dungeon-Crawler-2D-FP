@@ -27,7 +27,7 @@ namespace Dante.DungeonCrawler
 
         ATTACKING,
 
-        DEATH //TODO: Complete code to admin new states.
+        DIE //TODO: Complete code to admin new states.
     }
 
     public enum StateMechanics
@@ -48,7 +48,7 @@ namespace Dante.DungeonCrawler
         //ATTACK
         ATTACK,
 
-        DIE
+        DEATH
     }
 
     #endregion
@@ -106,6 +106,10 @@ namespace Dante.DungeonCrawler
         {
             switch (_state)
             {
+                case States.DIE:
+                    InitializeDeathState();
+                    //gameObject.SetActive(false); //PROTOTYPE TO DELETE
+                    break;
                 case States.IDLE_UP:
                 case States.IDLE_DOWN:
                 case States.IDLE_LEFT:
@@ -130,11 +134,6 @@ namespace Dante.DungeonCrawler
                 case States.SPRINTING_RIGHT:
                 case States.SPRINTING_DOWN:
                     InitializeSprintingState();
-                    break;
-
-                case States.DEATH:
-                    InitializeDeathState();
-                    //gameObject.SetActive(false); //PROTOTYPE TO DELETE
                     break;
             }
         }
@@ -168,7 +167,7 @@ namespace Dante.DungeonCrawler
                     ExecutingSprintingState();
                     break;
 
-                case States.DEATH:
+                case States.DIE:
                     ExecutingDeathState();
                     //gameObject.SetActive(false); //PROTOTYPE TO DELETE
                     break;
@@ -204,7 +203,7 @@ namespace Dante.DungeonCrawler
                     FinalizeSprintingState();
                     break;
 
-                case States.DEATH:
+                case States.DIE:
                     FinalizeDeathState();
                     //gameObject.SetActive(false); //PROTOTYPE TO DELETE
                     break;
@@ -301,17 +300,13 @@ namespace Dante.DungeonCrawler
         #region DeathState
         protected virtual void InitializeDeathState()
         {
-            if(_agent as EnemyNPC)
+            if(_agent as DestroyableObjects)
             {
-                
+                StartCoroutine(AgentDeathCoroutine());
             }
-            else if(_agent as PlayersAvatar)
+            else
             {
-
-            }
-            else if(_agent as DestroyableObjects)
-            {
-
+                StartCoroutine(AgentDeathCoroutine());
             }
         }
 
@@ -328,7 +323,6 @@ namespace Dante.DungeonCrawler
         #endregion FiniteStateMachineStates
 
         #endregion
-
 
         #region UnityMethods
 
@@ -359,6 +353,7 @@ namespace Dante.DungeonCrawler
         //Action
         public void StateMechanic(StateMechanics value)
         {
+
             FinalizeState();
             CleanAnimatorFlags();
             _animator.SetBool(value.ToString(), true);
@@ -375,7 +370,7 @@ namespace Dante.DungeonCrawler
 
         #region Coroutines
 
-        private IEnumerator EnemyDeathCoroutine()
+        private IEnumerator AgentDeathCoroutine()
         {
 
             yield return new WaitForSeconds(_deathClip.length);
@@ -401,6 +396,10 @@ namespace Dante.DungeonCrawler
             set { _currentMovementSpeed = value; }
         }
 
+        public float SetAllMovementSpeeds
+        {
+            set { _currentMovementSpeed = value; walkSpeed = value; sprintSpeed = value; }
+        }
         public States GetCurrentState
         {
             get { return _state;}

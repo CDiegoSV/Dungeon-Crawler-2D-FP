@@ -70,6 +70,7 @@ MonoBehaviour:
   sprintSpeed: 0
   _animator: {fileID: 7996550187066274308}
   _rigidbody: {fileID: 6456717340057506576}
+  _deathClip: {fileID: 7400000, guid: 355294c9b3d4dd847b81563c01ce5a9f, type: 2}
   _state: 0
   _movementDirection: {x: 0, y: 0}
   _currentMovementSpeed: 0

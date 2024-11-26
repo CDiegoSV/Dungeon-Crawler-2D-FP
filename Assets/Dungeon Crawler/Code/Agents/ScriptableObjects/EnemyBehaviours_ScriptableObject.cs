@@ -12,7 +12,9 @@ namespace Dante.DungeonCrawler
         STOP,  //STOP
         MOVE_TO_RANDOM_DIRECTION,  //MOVE
         FIRE,  //ATTACK
-        PERSECUTE_THE_AVATAR  //MOVE  //Persecution
+        PERSECUTE_THE_AVATAR,  //MOVE  //Persecution
+
+        DEACTIVATE
     }
 
     #endregion

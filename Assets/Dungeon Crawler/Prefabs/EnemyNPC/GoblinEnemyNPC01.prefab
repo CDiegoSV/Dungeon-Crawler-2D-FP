@@ -50,12 +50,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1924325280389380605, guid: bea63977193ced44890d7c209cbabdac, type: 3}
       propertyPath: m_Name
-      value: GoblinEnemyNPC
+      value: GoblinEnemyNPC01
       objectReference: {fileID: 0}
     - target: {fileID: 4596535123460400308, guid: bea63977193ced44890d7c209cbabdac, type: 3}
       propertyPath: scriptBehaviours
       value: 
       objectReference: {fileID: 11400000, guid: 5af19352e76930341ab79a111f9ecf12, type: 2}
+    - target: {fileID: 4952176715906159113, guid: bea63977193ced44890d7c209cbabdac, type: 3}
+      propertyPath: _deathClip
+      value: 
+      objectReference: {fileID: 7400000, guid: 27ff5b480eecb0e499c9e950e9bae129, type: 2}
     - target: {fileID: 6397055293645342873, guid: bea63977193ced44890d7c209cbabdac, type: 3}
       propertyPath: m_Controller
       value: 

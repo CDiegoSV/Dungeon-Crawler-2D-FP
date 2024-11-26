@@ -75,6 +75,10 @@ namespace Dante.DungeonCrawler
             get { return damage; }
         }
 
+        public Vector2 SetColliderOffset
+        {
+            set { _collider.offset = value; }
+        }
         #endregion
     }
 }
