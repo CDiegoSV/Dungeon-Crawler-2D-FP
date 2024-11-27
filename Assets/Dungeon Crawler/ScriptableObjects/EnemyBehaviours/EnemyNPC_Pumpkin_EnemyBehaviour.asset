@@ -29,3 +29,6 @@ MonoBehaviour:
   - type: 2
     speed: 0
     time: 1
+  - type: 0
+    speed: 0
+    time: 6

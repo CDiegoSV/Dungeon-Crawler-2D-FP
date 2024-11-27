@@ -63,19 +63,20 @@ namespace Dante.DungeonCrawler
                     _fsm.StateMechanic(_movementStateMechanic);
                     break;
                 case EnemyBehaviourType.DEACTIVATE:
-                    gameObject.SetActive(false);
+                    _fsm.StateMechanic(StateMechanics.DEATH);
                     break;
             }
         }
 
-        protected IEnumerator TimerForEnemyBehaviour()
+        protected virtual IEnumerator TimerForEnemyBehaviour()
         {
             yield return new WaitForSeconds(_currentEnemyBehaviour.time);
             FinalizeSubState();
-            GoToNextEnemyBehaviour();
+            if (_currentEnemyBehaviourIndex < scriptBehaviours.patrolBehaviours.Length)
+                GoToNextEnemyBehaviour();
         }
 
-        protected void GoToNextEnemyBehaviour()
+        protected virtual void GoToNextEnemyBehaviour()
         {
             _currentEnemyBehaviourIndex++;
             if (_currentEnemyBehaviourState == EnemyBehaviourState.PATROL)
@@ -117,6 +118,9 @@ namespace Dante.DungeonCrawler
                 case EnemyBehaviourType.FIRE:
                     InitializeFireSubStateMachine();
                     break;
+                case EnemyBehaviourType.DEACTIVATE:
+                    InitializeDeactivateSubStateMachine();
+                    break;
             }
         }
 
@@ -135,6 +139,9 @@ namespace Dante.DungeonCrawler
                     break;
                 case EnemyBehaviourType.FIRE:
                     FinalizeFireSubStateMachine();
+                    break;
+                case EnemyBehaviourType.DEACTIVATE:
+                    FinalizeDeactivateSubStateMachine();
                     break;
             }
         }
@@ -346,8 +353,13 @@ namespace Dante.DungeonCrawler
         protected void ExecutingPersecuteTheAvatarSubStateMachine()
         {
             //as the avatar may move, we have to update the direction towards him / her
-            _fsm.SetMovementDirection = (_avatarsTransform.position - transform.position).normalized;
-            CalculateStateMechanicDirection();
+            if(_avatarsTransform != null)
+            {
+                _fsm.SetMovementDirection = (_avatarsTransform.position - transform.position).normalized;
+                CalculateStateMechanicDirection();
+            }
+
+            
             if (_previousMovementStateMechanic != _movementStateMechanic)
             {
                 InvokeStateMechanic();
@@ -378,6 +390,24 @@ namespace Dante.DungeonCrawler
         protected void FinalizeFireSubStateMachine()
         {
 
+        }
+
+        #endregion
+
+        #region DeactivateSubStateMachineMethods
+
+        protected void InitializeDeactivateSubStateMachine()
+        {
+            InvokeStateMechanic();
+        }
+
+        protected void ExecutingDeactivateSubStateMachine()
+        {
+
+        }
+
+        protected void FinalizeDeactivateSubStateMachine()
+        {
         }
 
         #endregion

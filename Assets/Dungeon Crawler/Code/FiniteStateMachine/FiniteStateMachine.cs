@@ -336,6 +336,8 @@ namespace Dante.DungeonCrawler
             #endif
         }
 
+        
+
         private void Start()
         {
             InitializeFiniteStateMachine();
@@ -372,9 +374,22 @@ namespace Dante.DungeonCrawler
 
         private IEnumerator AgentDeathCoroutine()
         {
-
+            Debug.Log(gameObject.name + " is dying");
+            _agent.transform.GetChild(1).gameObject.SetActive(false);
             yield return new WaitForSeconds(_deathClip.length);
             _agent.gameObject.SetActive(false);
+            if(_agent as EnemyNPC)
+            {
+                EnemyNPC tempEnemy = _agent as EnemyNPC;
+                if(!tempEnemy.isEnemyProjectile)
+                {
+                    _agent.transform.GetChild(1).gameObject.SetActive(true);
+                }
+            }
+            else
+            {
+                _agent.transform.GetChild(1).gameObject.SetActive(true);
+            }
         }
 
         #endregion

@@ -54,7 +54,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1924325280389380605, guid: bea63977193ced44890d7c209cbabdac, type: 3}
       propertyPath: m_Name
-      value: EnemyProjectile Variant
+      value: EnemyProjectile
       objectReference: {fileID: 0}
     - target: {fileID: 4596535123460400308, guid: bea63977193ced44890d7c209cbabdac, type: 3}
       propertyPath: scriptBehaviours
@@ -64,10 +64,18 @@ PrefabInstance:
       propertyPath: isEnemyProjectile
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4952176715906159113, guid: bea63977193ced44890d7c209cbabdac, type: 3}
+      propertyPath: _agent
+      value: 
+      objectReference: {fileID: 7959913135100869755}
     - target: {fileID: 6397055293645342873, guid: bea63977193ced44890d7c209cbabdac, type: 3}
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 22100000, guid: 2c46600191aa7e840a82fc36eb133e62, type: 2}
+    - target: {fileID: 6482758371258725771, guid: bea63977193ced44890d7c209cbabdac, type: 3}
+      propertyPath: _agent
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 7789807502596111823, guid: bea63977193ced44890d7c209cbabdac, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -80,8 +88,39 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: -2011526429698918646, guid: 4b6c7cd861ab4834d89ff41bc07966c2, type: 3}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4596535123460400308, guid: bea63977193ced44890d7c209cbabdac, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1924325280389380605, guid: bea63977193ced44890d7c209cbabdac, type: 3}
+      insertIndex: 1
+      addedObject: {fileID: 7959913135100869755}
   m_SourcePrefab: {fileID: 100100000, guid: bea63977193ced44890d7c209cbabdac, type: 3}
+--- !u!1 &7851311588405646594 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1924325280389380605, guid: bea63977193ced44890d7c209cbabdac, type: 3}
+  m_PrefabInstance: {fileID: 8521344784726109439}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7959913135100869755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7851311588405646594}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42b2ed3af2c71164791a2aa3f77a42c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealthPoints: 3
+  _rigidbody: {fileID: 0}
+  _fsm: {fileID: 0}
+  scriptBehaviours: {fileID: 11400000, guid: badf954da0d37bb48b237c8cfa553a29, type: 2}
+  isEnemyProjectile: 1
+  enemyProjectile: {fileID: 0}
+  _currentEnemyBehaviour:
+    type: 0
+    speed: 0
+    time: 0
