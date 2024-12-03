@@ -387,9 +387,11 @@ namespace Dante.DungeonCrawler
                     _agent.transform.GetChild(1).gameObject.SetActive(true);
                 }
             }
-            else
+            else if(_agent as PlayersAvatar)
             {
                 _agent.transform.GetChild(1).gameObject.SetActive(true);
+                PlayersAvatar avatar = _agent as PlayersAvatar;
+                UIManager.Instance.PlayerIsDead((int)avatar.playerIndex);
             }
         }
 

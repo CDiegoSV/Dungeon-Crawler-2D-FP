@@ -30,7 +30,7 @@ namespace Dante.DungeonCrawler
                     Debug.Log(":D");
                     _avatar = avatar;
                     _avatar.gameObject.SetActive(true);
-                    this.transform.parent = avatar.transform;
+                    this.transform.parent = avatar.transform.parent;
                     this.transform.localPosition = Vector2.zero;
                     UIManager.Instance.StartPressed((int)avatar.playerIndex);
                 }

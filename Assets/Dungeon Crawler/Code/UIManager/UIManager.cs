@@ -58,5 +58,12 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    public void PlayerIsDead(int playerIndex)
+    {
+        playerCanvasObjects[playerIndex].playerHealth.SetActive(false);
+        playerCanvasObjects[playerIndex].playerPressStart.SetActive(false);
+        playerCanvasObjects[playerIndex].playerIsDead.SetActive(true);
+    }
+
     #endregion
 }
