@@ -1,5 +1,5 @@
 {
-    "name": "GameplayInputActions",
+    "name": "GameplayInputActions 1",
     "maps": [
         {
             "name": "Gameplay",
@@ -252,6 +252,17 @@
                 },
                 {
                     "name": "",
+                    "id": "09da457f-5c9c-4000-8ecd-93154b627ddd",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyBoardMouse",
+                    "action": "INTERACT",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "539addf7-9e30-4b95-8775-c42b3d3ab5b9",
                     "path": "<Keyboard>/shift",
                     "interactions": "",
@@ -275,5 +286,33 @@
             ]
         }
     ],
-    "controlSchemes": []
+    "controlSchemes": [
+        {
+            "name": "KeyBoardMouse",
+            "bindingGroup": "KeyBoardMouse",
+            "devices": [
+                {
+                    "devicePath": "<Keyboard>",
+                    "isOptional": false,
+                    "isOR": false
+                },
+                {
+                    "devicePath": "<Mouse>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        },
+        {
+            "name": "Gamepad",
+            "bindingGroup": "Gamepad",
+            "devices": [
+                {
+                    "devicePath": "<Gamepad>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        }
+    ]
 }

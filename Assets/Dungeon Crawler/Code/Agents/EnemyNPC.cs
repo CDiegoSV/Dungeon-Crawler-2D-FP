@@ -344,6 +344,7 @@ namespace Dante.DungeonCrawler
                     }
                 }
                 _avatarsTransform = _lastCloserPlayer.transform;
+                Debug.Log("InitializePersecute - From: " + gameObject.name + " to: " + _lastCloserPlayer.name);
             }
             _fsm.SetMovementDirection = (_avatarsTransform.position - transform.position).normalized;
             _fsm.SetAllMovementSpeeds = _currentEnemyBehaviour.speed;

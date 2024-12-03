@@ -16,7 +16,7 @@ public class EnemyProjectile : EnemyNPC
 
     private void OnEnable()
     {
-        _fsm.SetAllMovementSpeeds = _currentEnemyBehaviour.speed;
+        //_fsm.SetAllMovementSpeeds = _currentEnemyBehaviour.speed;
         if (isEnemyProjectile)
         {
             transform.localPosition = Vector3.zero;
@@ -80,8 +80,11 @@ public class EnemyProjectile : EnemyNPC
     protected override void GoToNextEnemyBehaviour()
     {
         _currentEnemyBehaviourIndex++;
+        print(_currentEnemyBehaviourIndex.ToString());
         if (_currentEnemyBehaviourState == EnemyBehaviourState.PATROL)
         {
+            print(_currentEnemyBehaviourIndex.ToString());
+
             _currentEnemyBehaviour = scriptBehaviours.patrolBehaviours[_currentEnemyBehaviourIndex];
         }
         else // PERSECUTING

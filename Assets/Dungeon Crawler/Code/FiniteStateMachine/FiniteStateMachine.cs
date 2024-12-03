@@ -375,6 +375,7 @@ namespace Dante.DungeonCrawler
         private IEnumerator AgentDeathCoroutine()
         {
             Debug.Log(gameObject.name + " is dying");
+            _agent.IsDead = true;
             _agent.transform.GetChild(1).gameObject.SetActive(false);
             yield return new WaitForSeconds(_deathClip.length);
             _agent.gameObject.SetActive(false);

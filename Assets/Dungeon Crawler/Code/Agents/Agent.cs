@@ -28,11 +28,13 @@ namespace Dante.DungeonCrawler
         #region References
 
         [SerializeField, HideInInspector] protected Rigidbody2D _rigidbody;
-        [SerializeField, HideInInspector] protected FiniteStateMachine _fsm;
+        [SerializeField] protected FiniteStateMachine _fsm;
 
         #endregion
 
         #region RuntimeVariables
+
+        [SerializeField] protected bool _isDead;
 
         protected Vector2 _movementDirection;
         protected StateMechanics _movementStateMechanic;
@@ -178,6 +180,8 @@ namespace Dante.DungeonCrawler
         {
             get { return _movementStateMechanic; }
         }
+
+        public bool IsDead { get { return _isDead; } set { _isDead = value; } }
 
         #endregion
     }

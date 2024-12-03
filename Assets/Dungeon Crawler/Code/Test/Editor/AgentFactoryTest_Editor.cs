@@ -6,7 +6,7 @@ using UnityEditor;
 [CustomEditor(typeof(AgentFactoryTest))]
 public class AgentFactoryTest_Editor : Editor
 {
-    void OnInspectorGUI()
+    new void OnInspectorGUI()
     {
         DrawDefaultInspector();
         if (GUILayout.Button("Generate Agents in this level"))

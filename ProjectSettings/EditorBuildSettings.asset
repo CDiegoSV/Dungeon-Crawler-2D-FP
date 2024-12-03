@@ -9,6 +9,6 @@ EditorBuildSettings:
     path: Assets/Dungeon Crawler/Scenes/MainMenu.unity
     guid: 9073e6514a800784d8c086a9f2b49412
   - enabled: 1
-    path: Assets/Dungeon Crawler/Scenes/DCLevel.unity
-    guid: f0c63ca321cbaad4ca59e0a63115151b
+    path: Assets/Dungeon Crawler/Scenes/DungeonLevel.unity
+    guid: c90c985480d839f40ab1724c1e3cb3dd
   m_configObjects: {}

@@ -25,13 +25,14 @@ namespace Dante.DungeonCrawler
             _allAvatarsInScene = GameObject.FindObjectsOfType<PlayersAvatar>(true);
             foreach (PlayersAvatar avatar in _allAvatarsInScene)
             {
-                if ((int)avatar.playerIndex == _playerInput.playerIndex)
+                if ((int)avatar.playerIndex == _playerInput.playerIndex && !avatar.IsDead)
                 {
                     Debug.Log(":D");
                     _avatar = avatar;
                     _avatar.gameObject.SetActive(true);
                     this.transform.parent = avatar.transform;
                     this.transform.localPosition = Vector2.zero;
+                    UIManager.Instance.StartPressed((int)avatar.playerIndex);
                 }
             }
             gameObject.name = this.name + "_Player" + _playerInput.playerIndex;

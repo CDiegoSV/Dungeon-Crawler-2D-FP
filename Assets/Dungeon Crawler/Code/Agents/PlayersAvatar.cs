@@ -230,6 +230,7 @@ namespace Dante.DungeonCrawler
 
         public bool IsSprinting { get { return _isSprinting; } }
 
+
         public Vector2 GetMovementInputVector
         {
             get { return _movementInputVector; }
