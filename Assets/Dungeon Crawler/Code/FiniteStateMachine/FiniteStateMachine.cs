@@ -69,6 +69,8 @@ namespace Dante.DungeonCrawler
 
         #region References
 
+        [SerializeField] protected DC_GameReferee _gameReferee;
+
         [SerializeField, HideInInspector] protected Animator _animator;
         [SerializeField,HideInInspector] protected Rigidbody2D _rigidbody;
 
@@ -90,7 +92,7 @@ namespace Dante.DungeonCrawler
 
         protected void InitializeFiniteStateMachine()
         {
-            
+            _gameReferee = FindAnyObjectByType<DC_GameReferee>();
         }
 
         protected void CleanAnimatorFlags()
@@ -382,22 +384,29 @@ namespace Dante.DungeonCrawler
             if(_agent as EnemyNPC)
             {
                 EnemyNPC tempEnemy = _agent as EnemyNPC;
-                if(!tempEnemy.isEnemyProjectile)
+                _agent.transform.GetChild(0).gameObject.SetActive(false);
+                if (!tempEnemy.isEnemyProjectile)
                 {
-                    _agent.transform.GetChild(1).gameObject.SetActive(true);
+                    _agent.transform.GetChild(1).gameObject.SetActive(false);
                 }
             }
             else if(_agent as PlayersAvatar)
             {
-                _agent.transform.GetChild(1).gameObject.SetActive(true);
+                _agent.transform.GetChild(1).gameObject.SetActive(false);
                 PlayersAvatar avatar = _agent as PlayersAvatar;
                 UIManager.Instance.PlayerIsDead((int)avatar.playerIndex);
+                _gameReferee.CheckActivePlayers();
             }
         }
 
         #endregion
 
         #region GettersSetters
+
+        public DC_GameReferee GetGameReferee
+        {
+            get { return _gameReferee; }
+        }
 
         public Vector2 GetMovementDirection
         {

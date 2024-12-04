@@ -54,7 +54,7 @@ namespace Dante.DungeonCrawler
                     _fsm.StateMechanic(StateMechanics.STOP);
                     break;
                 case EnemyBehaviourType.FIRE:
-                    //_fsm.StateMechanic(StateMechanics.MOVE_RIGHT);
+                    _fsm.StateMechanic(StateMechanics.ATTACK);
                     break;
                 case EnemyBehaviourType.MOVE_TO_RANDOM_DIRECTION:
                 case EnemyBehaviourType.PERSECUTE_THE_AVATAR:
@@ -70,10 +70,12 @@ namespace Dante.DungeonCrawler
 
         protected virtual IEnumerator TimerForEnemyBehaviour()
         {
+            Debug.Log(gameObject.name + " entró a la Corutina en el estado: " + _currentEnemyBehaviour.type.ToString());
             yield return new WaitForSeconds(_currentEnemyBehaviour.time);
             FinalizeSubState();
             if (_currentEnemyBehaviourIndex < scriptBehaviours.patrolBehaviours.Length)
                 GoToNextEnemyBehaviour();
+            Debug.Log(gameObject.name + " salió de la Corutina en el estado: " + _currentEnemyBehaviour.type.ToString());
         }
 
         protected virtual void GoToNextEnemyBehaviour()
@@ -212,10 +214,9 @@ namespace Dante.DungeonCrawler
         private void OnEnable()
         {
             _fsm.SetAllMovementSpeeds = _currentEnemyBehaviour.speed;
-            if(isEnemyProjectile)
-            {
-                transform.localPosition = Vector3.zero;
-            }
+            transform.GetChild(0).gameObject.SetActive(true);
+            transform.GetChild(1).gameObject.SetActive(true);
+            InitializeAgent();
         }
 
         private void OnDisable()
@@ -380,17 +381,22 @@ namespace Dante.DungeonCrawler
 
         protected void InitializeFireSubStateMachine()
         {
+            InvokeStateMechanic();
+            enemyProjectile.transform.SetParent(transform.parent);
+            enemyProjectile.transform.position = new Vector3(transform.position.x, transform.position.y - 0.2f, transform.position.z);
             enemyProjectile.SetActive(true);
+            InitializePersecutionBehaviour();
         }
 
         protected void ExecutingFireSubStateMachine()
         {
-
+            //Debug.Log("Still in: " + EnemyBehaviourType.FIRE.ToString());
+            //print(_currentEnemyBehaviour.time.ToString());
         }
 
         protected void FinalizeFireSubStateMachine()
         {
-
+            
         }
 
         #endregion
@@ -399,7 +405,7 @@ namespace Dante.DungeonCrawler
 
         protected void InitializeDeactivateSubStateMachine()
         {
-            InvokeStateMechanic();
+            //InvokeStateMechanic();
         }
 
         protected void ExecutingDeactivateSubStateMachine()

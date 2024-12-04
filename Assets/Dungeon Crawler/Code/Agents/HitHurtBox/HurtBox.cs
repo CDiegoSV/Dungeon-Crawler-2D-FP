@@ -105,6 +105,11 @@ namespace Dante.DungeonCrawler
         {
             _isInCooldown = true;
             _currentHealthPoints -= damage;
+            if(_agent as PlayersAvatar)
+            {
+                PlayersAvatar playersAvatar = _agent as PlayersAvatar;
+                UIManager.Instance.HeartLoss((int)playersAvatar.playerIndex);
+            }
             yield return new WaitForSeconds(_hurtBoxSO.hurtBoxValues.cooldownPerHit);
             _isInCooldown = false;
         }

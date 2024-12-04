@@ -39,6 +39,8 @@ namespace Dante.DungeonCrawler
 
         #region RuntimeVariables
 
+        [SerializeField] protected ControllerInputHandler _controllerInputHandler;
+
         [SerializeField] protected Vector2 _movementInputVector;
         [SerializeField] protected bool _isInteracting;
         [SerializeField] protected bool _isCarrying;
@@ -50,6 +52,7 @@ namespace Dante.DungeonCrawler
         public override void InitializeAgent()
         {
             base.InitializeAgent();
+            transform.GetChild(1).gameObject.SetActive(true);
             _isCarrying = false;
             _isInteracting = false;
             if(_hitBox == null)
@@ -76,29 +79,32 @@ namespace Dante.DungeonCrawler
 
         private void FixedUpdate()
         {
-            switch (_fsm.GetCurrentState)
+            if(!_fsm.GetGameReferee.IsTheGamePaused)
             {
-                case States.ATTACKING:
-                    break;
+                switch (_fsm.GetCurrentState)
+                {
+                    case States.ATTACKING:
+                        break;
 
-                case States.DIE:
-                    break;
+                    case States.DIE:
+                        break;
 
-                default:
-                    if (_movementInputVector.magnitude > 0)
-                    {
-
-                        //Dot
-                        //!=
-                        //magnitude
-                        if (_movementInputVector != _fsm.GetMovementDirection)
+                    default:
+                        if (_movementInputVector.magnitude > 0)
                         {
-                            _fsm.SetMovementDirection = _movementInputVector;
-                            CalculateStateMechanicDirection();
-                            _fsm.StateMechanic(_movementStateMechanic);
+
+                            //Dot
+                            //!=
+                            //magnitude
+                            if (_movementInputVector != _fsm.GetMovementDirection)
+                            {
+                                _fsm.SetMovementDirection = _movementInputVector;
+                                CalculateStateMechanicDirection();
+                                _fsm.StateMechanic(_movementStateMechanic);
+                            }
                         }
-                    }
-                    break;
+                        break;
+                }
             }
         }
 
@@ -113,7 +119,7 @@ namespace Dante.DungeonCrawler
 
         public void OnMOVE(InputAction.CallbackContext value)
         {
-            if (value.performed)
+            if (value.performed && !_fsm.GetGameReferee.IsTheGamePaused)
             {
                 _movementInputVector = new Vector2( value.ReadValue<Vector2>().x, value.ReadValue<Vector2>().y);
             }
@@ -130,7 +136,7 @@ namespace Dante.DungeonCrawler
         {
             if(!_isCarrying)
             {
-                if (value.performed)
+                if (value.performed && !_fsm.GetGameReferee.IsTheGamePaused)
                 {
                     switch (_fsm.GetCurrentState)
                     {
@@ -165,13 +171,13 @@ namespace Dante.DungeonCrawler
         {
             if (!_isCarrying)
             {
-                if (value.performed)
+                if (value.performed && !_fsm.GetGameReferee.IsTheGamePaused)
                 {
                     _isSprinting = true;
                     CalculateStateMechanicDirection();
                     _fsm.StateMechanic(_movementStateMechanic);
                 }
-                else if (value.canceled)
+                else if (value.canceled && !_fsm.GetGameReferee.IsTheGamePaused)
                 {
                     _isSprinting = false;
                     if(_fsm.GetMovementDirection != Vector2.zero)
@@ -191,17 +197,21 @@ namespace Dante.DungeonCrawler
         {
             if (value.performed)
             {
-
-            }
-            else if (value.canceled)
-            {
-
+                if (!_fsm.GetGameReferee.IsTheGamePaused)
+                {
+                    _fsm.GetGameReferee.SetPlayerWhoPausedTheGame = (int)playerIndex;
+                    _fsm.GetGameReferee.GameStateMechanic(GameStates.PAUSE);
+                }
+                else
+                {
+                    _fsm.GetGameReferee.GameStateMechanic(GameStates.GAME);
+                }
             }
         }
 
         public void OnINTERACT(InputAction.CallbackContext value)
         {
-            if (value.performed)
+            if (value.performed && !_fsm.GetGameReferee.IsTheGamePaused)
             {
                 _isInteracting = true;
             }
@@ -234,6 +244,12 @@ namespace Dante.DungeonCrawler
         public Vector2 GetMovementInputVector
         {
             get { return _movementInputVector; }
+        }
+
+        public ControllerInputHandler MyControllerInputHandler
+        {
+            set { _controllerInputHandler = value; }
+            get { return _controllerInputHandler; }
         }
 
         #endregion

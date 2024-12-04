@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
+using Dante.DungeonCrawler;
 
 public class ButtonListener : MonoBehaviour
 {
@@ -19,12 +20,19 @@ public class ButtonListener : MonoBehaviour
     #endregion
 
     #region Knobs
+    [Header("Button Presets")]
+
+    [SerializeField] private bool selectOnEnable;
+
     [Header("Button Selector")]
 
     [SerializeField] private bool sceneLoaderButton;
     [SerializeField] private int sceneID;
 
+    [SerializeField] private bool resumeButton;
+
     [SerializeField] private bool quitButton;
+
 
     #endregion
 
@@ -34,6 +42,10 @@ public class ButtonListener : MonoBehaviour
         _button = GetComponent<Button>();
         _button.onClick.AddListener(_onClickAction);
         InitializeButton();
+        if (selectOnEnable)
+        {
+            _button.Select();
+        }
     }
 
     private void OnEnable()
@@ -50,6 +62,7 @@ public class ButtonListener : MonoBehaviour
     #region Runtime Methods
     private void InitializeButton()
     {
+        
         if (sceneLoaderButton)
         {
             _onClickAction += SceneLoaderOnClickAction;
@@ -57,6 +70,10 @@ public class ButtonListener : MonoBehaviour
         else if (quitButton)
         {
             _onClickAction += QuitOnClickAction;
+        }
+        else if(resumeButton)
+        {
+            _onClickAction += ResumeOnClickAction;
         }
     }
 
@@ -91,6 +108,12 @@ public class ButtonListener : MonoBehaviour
     protected void QuitOnClickAction()
     {
         Application.Quit();
+    }
+
+    protected void ResumeOnClickAction()
+    {
+        DC_GameReferee gameReferee = FindAnyObjectByType<DC_GameReferee>();
+        gameReferee.GameStateMechanic(GameStates.GAME);
     }
     #endregion
 

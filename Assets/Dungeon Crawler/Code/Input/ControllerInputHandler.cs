@@ -7,6 +7,12 @@ namespace Dante.DungeonCrawler
 {
     public class ControllerInputHandler : MonoBehaviour
     {
+        #region References
+
+        private DC_GameReferee gameReferee;
+
+        #endregion
+
         #region LocalVariables
 
         protected PlayerInput _playerInput;
@@ -21,14 +27,17 @@ namespace Dante.DungeonCrawler
         void Start()
         {
             _playerInput = GetComponent<PlayerInput>();
-
             _allAvatarsInScene = GameObject.FindObjectsOfType<PlayersAvatar>(true);
+
+            gameReferee = GameObject.FindAnyObjectByType<DC_GameReferee>();
             foreach (PlayersAvatar avatar in _allAvatarsInScene)
             {
                 if ((int)avatar.playerIndex == _playerInput.playerIndex && !avatar.IsDead)
                 {
                     Debug.Log(":D");
                     _avatar = avatar;
+                    gameReferee.AddActivePlayersAvatar = avatar;
+                    avatar.MyControllerInputHandler = this;
                     _avatar.gameObject.SetActive(true);
                     this.transform.parent = avatar.transform.parent;
                     this.transform.localPosition = Vector2.zero;
@@ -65,6 +74,16 @@ namespace Dante.DungeonCrawler
         public void OnInteract(InputAction.CallbackContext value)
         {
             _avatar?.OnINTERACT(value);
+        }
+
+        #endregion
+
+
+        #region Public Methods
+
+        public void SwitchCurrentActionMapOfThePlayerInput(string mapName)
+        {
+            _playerInput.SwitchCurrentActionMap(mapName);
         }
 
         #endregion

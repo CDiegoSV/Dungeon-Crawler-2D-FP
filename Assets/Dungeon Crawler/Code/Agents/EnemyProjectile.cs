@@ -16,11 +16,8 @@ public class EnemyProjectile : EnemyNPC
 
     private void OnEnable()
     {
-        //_fsm.SetAllMovementSpeeds = _currentEnemyBehaviour.speed;
-        if (isEnemyProjectile)
-        {
-            transform.localPosition = Vector3.zero;
-        }
+        transform.GetChild(1).gameObject.SetActive(false);
+        InitializeAgent();
     }
 
     private void OnDisable()
@@ -71,10 +68,12 @@ public class EnemyProjectile : EnemyNPC
 
     protected override IEnumerator TimerForEnemyBehaviour()
     {
+        Debug.Log(gameObject.name + " entró a la Corutina en el estado: " + _currentEnemyBehaviour.type.ToString());
         yield return new WaitForSeconds(_currentEnemyBehaviour.time);
         FinalizeSubState();
         if (_currentEnemyBehaviourIndex < scriptBehaviours.patrolBehaviours.Length)
             GoToNextEnemyBehaviour();
+        Debug.Log(gameObject.name + " salió de la Corutina en el estado: " + _currentEnemyBehaviour.type.ToString());
     }
 
     protected override void GoToNextEnemyBehaviour()
@@ -84,7 +83,8 @@ public class EnemyProjectile : EnemyNPC
         if (_currentEnemyBehaviourState == EnemyBehaviourState.PATROL)
         {
             print(_currentEnemyBehaviourIndex.ToString());
-
+            if (_currentEnemyBehaviourIndex >= scriptBehaviours.patrolBehaviours.Length)
+                _currentEnemyBehaviourIndex = 0;
             _currentEnemyBehaviour = scriptBehaviours.patrolBehaviours[_currentEnemyBehaviourIndex];
         }
         else // PERSECUTING

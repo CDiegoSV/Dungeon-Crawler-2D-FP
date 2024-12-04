@@ -36,7 +36,11 @@ public class UIManager : MonoBehaviour
     #endregion
 
     #region References
+    [Header("Panel References")]
 
+    [SerializeField] private GameObject pausePanel;
+
+    [Header("Player Canvas References")]
     [SerializeField] private PlayerCanvasObjects[] playerCanvasObjects;
 
     #endregion
@@ -65,5 +69,43 @@ public class UIManager : MonoBehaviour
         playerCanvasObjects[playerIndex].playerIsDead.SetActive(true);
     }
 
+
+    public void HeartLoss(int playerIndex)
+    {
+        for (int i = 0; i < playerCanvasObjects[playerIndex].playerHealth.transform.childCount; i++)
+        {
+            int tempCurrentActiveHearts = 0;
+            if (playerCanvasObjects[playerIndex].playerHealth.transform.GetChild(i).gameObject.activeSelf)
+            {
+                tempCurrentActiveHearts++;
+            }
+            playerCanvasObjects[playerIndex].playerHealth.transform.GetChild(tempCurrentActiveHearts).gameObject.SetActive(false);
+        }
+    }
+    
+    public void HeartGain(int playerIndex)
+    {
+        for (int i = 0; i < playerCanvasObjects[playerIndex].playerHealth.transform.childCount; i++)
+        {
+            int tempCurrentActiveHearts = 0;
+            if (playerCanvasObjects[playerIndex].playerHealth.transform.GetChild(i).gameObject.activeSelf)
+            {
+                tempCurrentActiveHearts++;
+            }
+            playerCanvasObjects[playerIndex].playerHealth.transform.GetChild(tempCurrentActiveHearts).gameObject.SetActive(true);
+        }
+    }
+
+    public void TogglePausePanel()
+    {
+        if (!pausePanel.activeSelf)
+        {
+            pausePanel.SetActive(true);
+        }
+        else
+        {
+            pausePanel.SetActive(false);
+        }
+    }
     #endregion
 }
