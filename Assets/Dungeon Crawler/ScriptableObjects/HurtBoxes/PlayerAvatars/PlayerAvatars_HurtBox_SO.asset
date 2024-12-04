@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   agentType: 2
   hurtBoxValues:
-    maxHealthPoints: 6
+    maxHealthPoints: 3
     cooldownPerHit: 1

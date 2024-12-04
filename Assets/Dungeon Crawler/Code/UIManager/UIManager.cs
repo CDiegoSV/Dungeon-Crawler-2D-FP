@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
@@ -72,29 +73,36 @@ public class UIManager : MonoBehaviour
 
     public void HeartLoss(int playerIndex)
     {
-        for (int i = 0; i < playerCanvasObjects[playerIndex].playerHealth.transform.childCount; i++)
+        int tempCurrentActiveHearts = 0;
+
+        Debug.Log("Num de Cora: " + playerCanvasObjects[playerIndex].playerHealth.transform.GetChild(1).gameObject.transform.childCount.ToString());
+
+        for (int i = 0; i < playerCanvasObjects[playerIndex].playerHealth.transform.GetChild(1).gameObject.transform.childCount; i++)
         {
-            int tempCurrentActiveHearts = 0;
-            if (playerCanvasObjects[playerIndex].playerHealth.transform.GetChild(i).gameObject.activeSelf)
+            if (playerCanvasObjects[playerIndex].playerHealth.transform.GetChild(1).transform.GetChild(i).GetComponent<Image>().color == Color.white)
             {
                 tempCurrentActiveHearts++;
             }
-            playerCanvasObjects[playerIndex].playerHealth.transform.GetChild(tempCurrentActiveHearts).gameObject.SetActive(false);
+        }
+        playerCanvasObjects[playerIndex].playerHealth.transform.GetChild(1).transform.GetChild(tempCurrentActiveHearts -1 ).GetComponent<Image>().color = Color.black;
+        Debug.Log("Active Hearts Index: " + tempCurrentActiveHearts.ToString());
+
+    }
+
+    public void HeartGain(int playerIndex)
+    {
+        for (int i = 0; i < playerCanvasObjects[playerIndex].playerHealth.transform.GetChild(1).gameObject.transform.childCount; i++)
+        {
+            int tempCurrentActiveHearts = 0;
+            if (playerCanvasObjects[playerIndex].playerHealth.transform.GetChild(1).transform.GetChild(i).GetComponent<Image>().color == Color.white)
+            {
+                tempCurrentActiveHearts++;
+            }
+            playerCanvasObjects[playerIndex].playerHealth.transform.GetChild(1).transform.GetChild(tempCurrentActiveHearts -1 ).GetComponent<Image>().color = Color.white;
         }
     }
     
-    public void HeartGain(int playerIndex)
-    {
-        for (int i = 0; i < playerCanvasObjects[playerIndex].playerHealth.transform.childCount; i++)
-        {
-            int tempCurrentActiveHearts = 0;
-            if (playerCanvasObjects[playerIndex].playerHealth.transform.GetChild(i).gameObject.activeSelf)
-            {
-                tempCurrentActiveHearts++;
-            }
-            playerCanvasObjects[playerIndex].playerHealth.transform.GetChild(tempCurrentActiveHearts).gameObject.SetActive(true);
-        }
-    }
+
 
     public void TogglePausePanel()
     {

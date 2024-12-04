@@ -16,6 +16,7 @@ public class EnemyProjectile : EnemyNPC
 
     private void OnEnable()
     {
+        transform.GetChild(0).gameObject.SetActive(true);
         transform.GetChild(1).gameObject.SetActive(false);
         InitializeAgent();
     }
@@ -68,12 +69,19 @@ public class EnemyProjectile : EnemyNPC
 
     protected override IEnumerator TimerForEnemyBehaviour()
     {
-        Debug.Log(gameObject.name + " entró a la Corutina en el estado: " + _currentEnemyBehaviour.type.ToString());
+        //Debug.Log(gameObject.name + " entró a la Corutina en el estado: " + _currentEnemyBehaviour.type.ToString() + " - Time: " + _currentEnemyBehaviour.time);
+
         yield return new WaitForSeconds(_currentEnemyBehaviour.time);
+
         FinalizeSubState();
-        if (_currentEnemyBehaviourIndex < scriptBehaviours.patrolBehaviours.Length)
-            GoToNextEnemyBehaviour();
-        Debug.Log(gameObject.name + " salió de la Corutina en el estado: " + _currentEnemyBehaviour.type.ToString());
+        //Debug.Log(gameObject.name + " vaa salir salió de la Corutina del estado: " + _currentEnemyBehaviour.type.ToString());
+        //if (_currentEnemyBehaviourIndex < scriptBehaviours.patrolBehaviours.Length)
+        GoToNextEnemyBehaviour();
+        if(_enemyBehaviourCorroutine != null)
+        {
+            StopCoroutine(_enemyBehaviourCorroutine);
+        }
+        //0.1 seconds later, the new coroutine will be invoked ;)
     }
 
     protected override void GoToNextEnemyBehaviour()

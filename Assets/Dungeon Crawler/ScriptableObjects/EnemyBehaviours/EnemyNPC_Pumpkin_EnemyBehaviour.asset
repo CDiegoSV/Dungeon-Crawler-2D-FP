@@ -20,12 +20,12 @@ MonoBehaviour:
     speed: 0
     time: 1
   persecutionBehaviours:
-  - type: 0
-    speed: 0
-    time: 3
   - type: 1
     speed: 1
-    time: 1
+    time: 1.5
   - type: 2
+    speed: 0
+    time: 3
+  - type: 0
     speed: 0
     time: 3

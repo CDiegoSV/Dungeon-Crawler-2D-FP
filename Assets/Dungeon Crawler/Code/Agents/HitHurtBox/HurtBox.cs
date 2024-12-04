@@ -64,7 +64,6 @@ namespace Dante.DungeonCrawler
                             case AgentType.DestroyableObject:
                                 if(other.gameObject.layer != LayerMask.NameToLayer("EnemyNPC"))
                                 {
-
                                     if (_currentHealthPoints == 0)
                                     {
                                         _agent.StateMechanic(StateMechanics.DEATH);
@@ -95,6 +94,19 @@ namespace Dante.DungeonCrawler
                     }
                 }
             }
+            if (other.CompareTag("Heart"))
+            {
+                if(_agent as PlayersAvatar)
+                {
+                    if(_currentHealthPoints < _hurtBoxSO.hurtBoxValues.maxHealthPoints)
+                    {
+                        _currentHealthPoints++;
+                        PlayersAvatar playersAvatar = _agent as PlayersAvatar;
+                        UIManager.Instance.HeartGain((int)playersAvatar.playerIndex);
+                    }
+                    other.gameObject.SetActive(false);
+                }
+            }
         }
 
         #endregion
@@ -103,13 +115,23 @@ namespace Dante.DungeonCrawler
 
         IEnumerator DamageCoolDown(int damage)
         {
+            if (_agent as PlayersAvatar)
+            {
+                if (!_isInCooldown)
+                {
+                    PlayersAvatar playersAvatar = _agent as PlayersAvatar;
+                    UIManager.Instance.HeartLoss((int)playersAvatar.playerIndex);
+                }
+            }
             _isInCooldown = true;
             _currentHealthPoints -= damage;
-            if(_agent as PlayersAvatar)
+
+            if (_currentHealthPoints == 0)
             {
-                PlayersAvatar playersAvatar = _agent as PlayersAvatar;
-                UIManager.Instance.HeartLoss((int)playersAvatar.playerIndex);
+                _agent.StateMechanic(StateMechanics.DEATH);
+
             }
+
             yield return new WaitForSeconds(_hurtBoxSO.hurtBoxValues.cooldownPerHit);
             _isInCooldown = false;
         }

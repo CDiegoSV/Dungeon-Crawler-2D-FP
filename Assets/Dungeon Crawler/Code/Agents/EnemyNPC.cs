@@ -41,6 +41,7 @@ namespace Dante.DungeonCrawler
         protected int _currentEnemyBehaviourIndex;
         protected Transform _avatarsTransform;
         protected StateMechanics _previousMovementStateMechanic;
+        protected Coroutine _enemyBehaviourCorroutine;
 
         #endregion
 
@@ -70,12 +71,19 @@ namespace Dante.DungeonCrawler
 
         protected virtual IEnumerator TimerForEnemyBehaviour()
         {
-            Debug.Log(gameObject.name + " entró a la Corutina en el estado: " + _currentEnemyBehaviour.type.ToString());
+            //Debug.Log(gameObject.name + " entró a la Corutina en el estado: " + _currentEnemyBehaviour.type.ToString() + " - Time: " + _currentEnemyBehaviour.time);
+
             yield return new WaitForSeconds(_currentEnemyBehaviour.time);
+
             FinalizeSubState();
-            if (_currentEnemyBehaviourIndex < scriptBehaviours.patrolBehaviours.Length)
-                GoToNextEnemyBehaviour();
-            Debug.Log(gameObject.name + " salió de la Corutina en el estado: " + _currentEnemyBehaviour.type.ToString());
+            //Debug.Log(gameObject.name + " vaa salir salió de la Corutina del estado: " + _currentEnemyBehaviour.type.ToString());
+            //if (_currentEnemyBehaviourIndex < scriptBehaviours.patrolBehaviours.Length)
+            GoToNextEnemyBehaviour();
+            if(_enemyBehaviourCorroutine != null)
+            {
+                StopCoroutine(_enemyBehaviourCorroutine);
+            }
+            //0.1 seconds later, the new coroutine will be invoked ;)
         }
 
         protected virtual void GoToNextEnemyBehaviour()
@@ -100,8 +108,13 @@ namespace Dante.DungeonCrawler
             {
                 //It is not a perpetual finite state,
                 //so we will start the clock ;)
-                StartCoroutine(TimerForEnemyBehaviour());
+                Invoke("InvokeCorroutine", 0.1f);
             }
+        }
+
+        protected void InvokeCorroutine()
+        {
+            _enemyBehaviourCorroutine = StartCoroutine(TimerForEnemyBehaviour());
         }
 
         protected void InitializeSubState()
@@ -344,7 +357,7 @@ namespace Dante.DungeonCrawler
                         _lastCloserPlayer = allPlayersInScene[i];
                     }
                 }
-                _avatarsTransform = _lastCloserPlayer.transform;
+                _avatarsTransform = _lastCloserPlayer?.transform;
                 Debug.Log("InitializePersecute - From: " + gameObject.name + " to: " + _lastCloserPlayer.name);
             }
             _fsm.SetMovementDirection = (_avatarsTransform.position - transform.position).normalized;
@@ -385,7 +398,7 @@ namespace Dante.DungeonCrawler
             enemyProjectile.transform.SetParent(transform.parent);
             enemyProjectile.transform.position = new Vector3(transform.position.x, transform.position.y - 0.2f, transform.position.z);
             enemyProjectile.SetActive(true);
-            InitializePersecutionBehaviour();
+            //InitializePersecutionBehaviour();
         }
 
         protected void ExecutingFireSubStateMachine()
