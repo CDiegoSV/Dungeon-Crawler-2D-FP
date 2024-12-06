@@ -18,6 +18,7 @@ namespace Dante.DungeonCrawler
     {
         #region Knobs
 
+        [SerializeField] private bool vessel;
 
         #endregion
 
@@ -52,6 +53,25 @@ namespace Dante.DungeonCrawler
         #endregion
 
         #region PublicMethods
+
+        public void ItemDrop()
+        {
+            if (!vessel)
+            {
+                float roll = Random.Range(1f, 10f);
+
+                if (roll <= 2)
+                {
+                    transform.GetChild(2).gameObject.SetActive(true);
+                    transform.GetChild(2).gameObject.transform.SetParent(null);
+                }
+            }
+            else
+            {
+                transform.GetChild(2).gameObject.SetActive(true);
+                transform.GetChild(2).gameObject.transform.SetParent(null);
+            }
+        }
 
         #endregion
 

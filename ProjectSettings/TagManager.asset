@@ -8,6 +8,7 @@ TagManager:
   - HurtBox
   - WinTrigger
   - Heart
+  - Orb
   layers:
   - Default
   - TransparentFX

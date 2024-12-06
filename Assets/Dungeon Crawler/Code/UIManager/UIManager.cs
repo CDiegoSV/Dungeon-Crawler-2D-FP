@@ -98,7 +98,11 @@ public class UIManager : MonoBehaviour
             {
                 tempCurrentActiveHearts++;
             }
-            playerCanvasObjects[playerIndex].playerHealth.transform.GetChild(1).transform.GetChild(tempCurrentActiveHearts -1 ).GetComponent<Image>().color = Color.white;
+            if(playerCanvasObjects[playerIndex].playerHealth.transform.GetChild(1).transform.GetChild(i).GetComponent<Image>().color == Color.black)
+            {
+                playerCanvasObjects[playerIndex].playerHealth.transform.GetChild(1).transform.GetChild(i).GetComponent<Image>().color = Color.white;
+                break;
+            }
         }
     }
     

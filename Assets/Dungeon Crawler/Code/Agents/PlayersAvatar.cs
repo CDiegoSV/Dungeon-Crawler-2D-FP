@@ -108,6 +108,18 @@ namespace Dante.DungeonCrawler
             }
         }
 
+        //private void OnTriggerEnter(Collider other)
+        //{
+        //    if (other.CompareTag("Orb"))
+        //    {
+        //        if(IsInteracting && !_isCarrying)
+        //        {
+        //            _isCarrying = true;
+        //            other.gameObject.transform.SetParent(transform, false);
+        //        }
+        //    }
+        //}
+
         #endregion
 
         #region PublicMethods

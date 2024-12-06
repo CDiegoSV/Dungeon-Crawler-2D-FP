@@ -397,6 +397,12 @@ namespace Dante.DungeonCrawler
                 UIManager.Instance.PlayerIsDead((int)avatar.playerIndex);
                 _gameReferee.CheckActivePlayers();
             }
+            else
+            {
+                DestroyableObjects destroyableObject = _agent as DestroyableObjects;
+
+                destroyableObject.ItemDrop();
+            }
         }
 
         #endregion
