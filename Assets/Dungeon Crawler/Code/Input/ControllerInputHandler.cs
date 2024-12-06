@@ -86,6 +86,26 @@ namespace Dante.DungeonCrawler
             _playerInput.SwitchCurrentActionMap(mapName);
         }
 
+        public void ControllerRumble()
+        {
+            StartCoroutine(Rumble());
+        }
+
+
+        #endregion
+
+        #region Coroutines
+
+        private IEnumerator Rumble()
+        {
+
+            GetComponent<PlayerInput>().GetDevice<Gamepad>().SetMotorSpeeds(0.2f, 0.75f);
+
+            yield return new WaitForSeconds(0.2f);
+
+            GetComponent<PlayerInput>().GetDevice<Gamepad>().SetMotorSpeeds(0f, 0f);
+        }
+
         #endregion
     }
 }

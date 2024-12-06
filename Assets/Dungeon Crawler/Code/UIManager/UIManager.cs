@@ -40,6 +40,9 @@ public class UIManager : MonoBehaviour
     [Header("Panel References")]
 
     [SerializeField] private GameObject pausePanel;
+    [SerializeField] private GameObject lifePanel;
+    [SerializeField] private GameObject victoryPanel;
+    [SerializeField] private GameObject defeatPanel;
 
     [Header("Player Canvas References")]
     [SerializeField] private PlayerCanvasObjects[] playerCanvasObjects;
@@ -117,6 +120,20 @@ public class UIManager : MonoBehaviour
         else
         {
             pausePanel.SetActive(false);
+        }
+    }
+
+
+    public void MetaPanelActivation(bool victoryOfThePlayer)
+    {
+        lifePanel.SetActive(false);
+        if(victoryOfThePlayer)
+        {
+            victoryPanel.SetActive(true);
+        }
+        else
+        {
+            defeatPanel.SetActive(true);
         }
     }
     #endregion

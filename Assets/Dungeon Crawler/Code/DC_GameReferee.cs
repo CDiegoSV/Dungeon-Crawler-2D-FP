@@ -227,7 +227,8 @@ namespace Dante.DungeonCrawler
 
         private void InitializeLOSEStateMechanic()
         {
-
+            UIManager.Instance.MetaPanelActivation(false);
+            _isTheGamePaused = true;
         }
 
         private void ExecutingLOSEStateMechanic()
@@ -247,7 +248,8 @@ namespace Dante.DungeonCrawler
 
         private void InitializeVICTORYStateMechanic()
         {
-
+            UIManager.Instance.MetaPanelActivation(true);
+            _isTheGamePaused = true;
         }
 
         private void ExecutingVICTORYStateMechanic()

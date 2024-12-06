@@ -92,6 +92,7 @@ public class ButtonListener : MonoBehaviour
     IEnumerator SceneTransitionCoroutine()
     {
         _transitionPanel.Play("TransitionOut");
+        Time.timeScale = 1;
 
         yield return new WaitForSeconds(_transitionOutClip.length);
 
@@ -112,8 +113,12 @@ public class ButtonListener : MonoBehaviour
 
     protected void ResumeOnClickAction()
     {
-        DC_GameReferee gameReferee = FindAnyObjectByType<DC_GameReferee>();
-        gameReferee.GameStateMechanic(GameStates.GAME);
+        DC_GameReferee gameReferee;
+        if (FindAnyObjectByType<DC_GameReferee>())
+        {
+            gameReferee = FindAnyObjectByType<DC_GameReferee>();
+            gameReferee.GameStateMechanic(GameStates.GAME);
+        }
     }
     #endregion
 

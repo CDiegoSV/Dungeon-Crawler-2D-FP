@@ -121,6 +121,8 @@ namespace Dante.DungeonCrawler
                 {
                     PlayersAvatar playersAvatar = _agent as PlayersAvatar;
                     UIManager.Instance.HeartLoss((int)playersAvatar.playerIndex);
+                    CameraManager.instance.CameraShake();
+                    playersAvatar.MyControllerInputHandler.ControllerRumble();
                 }
             }
             _isInCooldown = true;

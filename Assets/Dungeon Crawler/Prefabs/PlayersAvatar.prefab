@@ -172,9 +172,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3209659465230041952, guid: ab90cba76176bc44f9b70b84ee440fb0, type: 3}
       insertIndex: 1
       addedObject: {fileID: 5222869770499505733}
-    - targetCorrespondingSourceObject: {fileID: 3209659465230041952, guid: ab90cba76176bc44f9b70b84ee440fb0, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 4977070031451818131}
   m_SourcePrefab: {fileID: 100100000, guid: ab90cba76176bc44f9b70b84ee440fb0, type: 3}
 --- !u!1 &356886694692863271 stripped
 GameObject:
@@ -203,41 +200,6 @@ MonoBehaviour:
   _movementInputVector: {x: 0, y: 0}
   _isInteracting: 0
   _isCarrying: 0
---- !u!58 &4977070031451818131
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 356886694692863271}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.3760004}
-  serializedVersion: 2
-  m_Radius: 1.5
 --- !u!114 &2747517136271650457 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1034084701641363678, guid: ab90cba76176bc44f9b70b84ee440fb0, type: 3}
