@@ -134,6 +134,7 @@ namespace Dante.DungeonCrawler
             if (value.performed && !_fsm.GetGameReferee.IsTheGamePaused)
             {
                 _movementInputVector = new Vector2( value.ReadValue<Vector2>().x, value.ReadValue<Vector2>().y);
+                //_controllerInputHandler.GetComponent<PlayerInput>().GetDevice<Gamepad>()?.SetMotorSpeeds();
             }
             else if (value.canceled)
             {

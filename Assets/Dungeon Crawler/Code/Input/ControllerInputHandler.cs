@@ -99,7 +99,7 @@ namespace Dante.DungeonCrawler
         private IEnumerator Rumble()
         {
 
-            GetComponent<PlayerInput>().GetDevice<Gamepad>().SetMotorSpeeds(0.2f, 0.75f);
+            GetComponent<PlayerInput>().GetDevice<Gamepad>()?.SetMotorSpeeds(0.2f, 0.75f);
 
             yield return new WaitForSeconds(0.2f);
 
